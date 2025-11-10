@@ -1,0 +1,14 @@
+@import "tailwindcss";
+@plugin "daisyui"{
+    themes: light --default;
+}
+ul a.active{
+    background-color: green;
+    color: white;
+}
+
+*{
+    font-family: "Inter", sans-serif;
+}
+
+

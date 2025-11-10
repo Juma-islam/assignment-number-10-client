@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "title": "Proper Watering",
+    "image": "https://i.ibb.co.com/Psb3Xvgq/istockphoto-137086506-612x612.jpg",
+    "description": "Water your indoor plants when the top 1-2 inches of soil feel dry. Overwatering can cause root rot."
+  },
+  {
+    "id": 2,
+    "title": "Sunlight & Placement",
+    "image": "https://i.ibb.co.com/M5j7Y0hM/istockphoto-901134626-612x612.jpg",
+    "description": "Keep your plants near bright, indirect sunlight. Avoid direct harsh rays to prevent leaf burn."
+  },
+  {
+    "id": 3,
+    "title": "Fertilizing Routine",
+    "image": "https://i.ibb.co.com/hRytcnX5/images-11.jpg",
+    "description": "Feed your plants once every 4–6 weeks using organic fertilizer to promote healthy growth."
+  },
+  {
+    "id": 4,
+    "title": "Soil & Potting Care",
+    "image": "https://i.ibb.co.com/jkBTPptH/istockphoto-1140967918-612x612.jpg",
+    "description": "Use well-draining soil and repot annually to ensure proper aeration and nutrient balance."
+  }
+]

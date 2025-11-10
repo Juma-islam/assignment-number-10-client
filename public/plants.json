@@ -1,0 +1,102 @@
+[
+  {
+    "title": "Broken streetlight near school",
+    "category": "Streetlight",
+    "location": "Uttara Sector 4, Dhaka",
+    "description": "Streetlight not working for 6 days, area remains dark at night.",
+    "image": "https://i.ibb.co.com/vCY0S0Kg/thomas-stephan-w-BCqp-K5extc-unsplash.jpg",
+    "amount": 180,
+    "email": "report1@mail.com",
+    "date": "2025-10-25"
+  },
+  {
+    "title": "Garbage piling up beside market",
+    "category": "Garbage",
+    "location": "Mirpur 11, Dhaka",
+    "description": "Market area filled with uncollected waste for three days.",
+    "image": "https://i.ibb.co.com/k60fv3q1/engin-akyurt-M2-W0-J6-Sqi-Sg-unsplash.jpg",
+    "amount": 210,
+    "email": "report2@mail.com",
+    "date": "2025-10-27"
+  },
+  {
+    "title": "Water leakage damaging road",
+    "category": "Water Supply",
+    "location": "Dhanmondi 10, Dhaka",
+    "description": "Pipe burst causing continuous water flow and road damage.",
+    "image": "https://i.ibb.co.com/23rBw9gf/markus-spiske-s-Fyd-XGrt5-OA-unsplash.jpg",
+    "amount": 260,
+    "email": "report3@mail.com",
+    "date": "2025-10-29"
+  },
+  {
+    "title": "Open manhole near hospital",
+    "category": "Road Safety",
+    "location": "Shyamoli, Dhaka",
+    "description": "Open manhole creating risk for patients and pedestrians.",
+    "image": "https://i.ibb.co.com/8n0Fg953/robert-ruggiero-aa-T5-DNw-A9-JQ-unsplash.jpg",
+    "amount": 300,
+    "email": "report4@mail.com",
+    "date": "2025-10-26"
+  },
+  {
+    "title": "Drain blocked by plastic waste",
+    "category": "Drainage",
+    "location": "Banasree, Dhaka",
+    "description": "Drainage system blocked, waterlogging after light rain.",
+    "image": "https://i.ibb.co.com/r2j3GR2g/ries-bosch-4-TWja-SZeol-U-unsplash.jpg",
+    "amount": 270,
+    "email": "report5@mail.com",
+    "date": "2025-10-28"
+  },
+  {
+    "title": "Construction debris on footpath",
+    "category": "Construction Waste",
+    "location": "Mohammadpur, Dhaka",
+    "description": "Footpath blocked with sand and bricks from nearby building.",
+    "image": "https://i.ibb.co.com/8DRzJSJY/marek-studzinski-V72-VFo-Z4-LIk-unsplash.jpg",
+    "amount": 250,
+    "email": "report6@mail.com",
+    "date": "2025-10-24"
+  },
+  {
+    "title": "Garbage truck leaking waste",
+    "category": "Garbage",
+    "location": "Khilgaon, Dhaka",
+    "description": "Garbage falling from moving truck, spreading bad smell.",
+    "image": "https://i.ibb.co.com/VWMRZq5H/carl-campbell-stz-Gl8p5-Vio-unsplash.jpg",
+    "amount": 230,
+    "email": "report7@mail.com",
+    "date": "2025-10-22"
+  },
+  {
+    "title": "Street flooded after small rain",
+    "category": "Drainage",
+    "location": "Rampura, Dhaka",
+    "description": "Poor drainage causing ankle-deep water after light rain.",
+    "image": "https://i.ibb.co.com/DDQNKWsR/cosmin-gurau-Jg-E9r5-Hs-Fh8-unsplash.jpg",
+    "amount": 320,
+    "email": "report8@mail.com",
+    "date": "2025-10-30"
+  },
+  {
+    "title": "Open garbage dumping site",
+    "category": "Garbage",
+    "location": "Jatrabari, Dhaka",
+    "description": "Residents dumping garbage in open area daily.",
+    "image": "https://i.ibb.co.com/Xx0JV7zZ/kenny-eliason-8-Yk4-T-t-DSYY-unsplash.jpg",
+    "amount": 240,
+    "email": "report9@mail.com",
+    "date": "2025-10-23"
+  },
+  {
+    "title": "Fallen electric pole blocking road",
+    "category": "Road Obstruction",
+    "location": "Tejgaon, Dhaka",
+    "description": "Electric pole fell during storm, blocking half of the street.",
+    "image": "https://i.ibb.co.com/B2Xf4k7C/ralph-katieb-RO8-u-FA-lh-Y-unsplash.jpg",
+    "amount": 400,
+    "email": "report10@mail.com",
+    "date": "2025-10-21"
+  }
+]
