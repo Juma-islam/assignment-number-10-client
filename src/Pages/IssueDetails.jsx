@@ -1,4 +1,4 @@
-import { use, useRef, useState } from "react";
+import { use, useEffect, useRef, useState } from "react";
 import { LuBadgeDollarSign } from "react-icons/lu";
 import { MdDateRange, MdLocationPin } from "react-icons/md";
 import { Link, useLoaderData } from "react-router";
@@ -11,6 +11,12 @@ const IssueDetails = () => {
   const issueModalRef = useRef(null);
   const { user } = use(AuthContext);
   const [contributors, setContributors] = useState([]);
+
+  useEffect(()=> {
+    fetch(`http://localhost:5000/contributions?issueId=${issue._id}`)
+.then(res => res.json())
+.then(data => setContributors(data)); 
+  }, [issue._id])
 
   const handleModalOpen = () => {
     issueModalRef.current.showModal();
@@ -26,9 +32,10 @@ const IssueDetails = () => {
       phone: e.target.phone.value,
       address: e.target.address.value,
       amount: e.target.amount.value,
-      date: new Date().toLocaleDateString(),
+      date: new Date().toISOString(),
       additionalInfo: e.target.info.value,
       image: user?.photoURL,
+      category: issue.category,
     };
 
     fetch("http://localhost:5000/contributions", {
@@ -89,12 +96,6 @@ const IssueDetails = () => {
               {issue.amount} (Suggested)
             </p>
             {/* Description */}
-            {/* <Link
-                to={`/update-model/${model._id}`}
-                className="btn btn-primary rounded-full bg-linear-to-r from-pink-500 to-red-600 text-white border-0 hover:from-pink-600 hover:to-red-700"
-              >
-                Update Model
-              </Link> */}
             <p className="text-gray-600 leading-relaxed text-base md:text-lg">{issue.description}</p>
             {/* flex gap-3 mt-6 */}
 

@@ -92,7 +92,7 @@ const Navbar = () => {
           <NavLink to="/my-issues">My Issues</NavLink>
         </li>
         <li className="font-semibold hover:text-green-500">
-          <NavLink to="/my-contribution">My Contribution</NavLink>
+          <NavLink to="/my-contributions">My Contributions</NavLink>
         </li>
           </>}
            </ul>

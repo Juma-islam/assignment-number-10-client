@@ -97,7 +97,7 @@ const MyIssues = () => {
         <div className="p-6 max-w-6xl mx-auto">
       <h1 className="text-3xl font-bold mb-6 text-center">My Issues</h1>
 
-      <div className="overflow-x-auto">
+      <div className="overflow-x-auto w-full">
         <table className="table w-full border">
           <thead className="bg-gray-100">
             <tr>
