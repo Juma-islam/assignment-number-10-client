@@ -55,7 +55,7 @@ Component: AddIssues,
             <IssueDetails />
           </PrivateRoute>
         ),
-        loader: () => fetch("/plants.json"),
+        loader: ({params}) => fetch(`http://localhost:5000/issues/${params.id}`),
         hydrateFallbackElement: <Loading />,
       },
     ],

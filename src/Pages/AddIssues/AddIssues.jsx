@@ -116,16 +116,16 @@ console.log(formData)
             />
           </div>
           {/* email  */}
-          {/* <div>
+          <div>
             <label className="label font-medium">Reporter Email</label>
             <input
               type="Email"
               name="email"
               readOnly
               className="input w-full rounded-full focus:border-0 focus:outline-gray-200"
-              placeholder="Email"
+              defaultValue={user.email}
             />
-          </div> */}
+          </div>
 
           {/* Submit Button */}
           <button

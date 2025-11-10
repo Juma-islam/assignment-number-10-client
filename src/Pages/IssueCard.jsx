@@ -20,7 +20,7 @@ const IssueCard = ({ issue }) => {
         </figure>
         <div className="card-body">
           <h2 className="card-title">{title}</h2>
-          <p className=" text-gray-700 font-semibold flex gap-2 items-center"><span className="text-xl text-indigo-400"><BiSolidCategory /></span> {category}</p>
+          <div className=" text-gray-700 font-semibold flex gap-2 items-center"><span className="text-xl text-indigo-400"><BiSolidCategory /></span> {category}</div>
           <p className="flex gap-2 items-center text-gray-700 font-semibold ">
             <span className=" text-blue-500 text-xl">
               <MdLocationPin />
