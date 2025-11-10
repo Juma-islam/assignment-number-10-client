@@ -1,5 +1,6 @@
 import { use } from "react";
 import { AuthContext } from "../../Provider/AuthContext";
+import { toast } from "react-toastify";
 
 const AddIssues = () => {
     const {user} = use(AuthContext)
@@ -27,9 +28,12 @@ const AddIssues = () => {
         })
         .then(res => res.json())
         .then(data => {
-          console.log(data)
+          if(data.success){
+            toast.success("Issue Added Successfully!")
+          }
         })
         .catch(err => {
+          toast.error("Failed to add issue")
           console.log(err)
         })
 console.log(formData)
@@ -130,7 +134,7 @@ console.log(formData)
           {/* Submit Button */}
           <button
             type="submit"
-            className="btn w-full text-white mt-6 rounded-full bg-linear-to-r from-pink-500 to-red-600 hover:from-pink-600 hover:to-red-700"
+            className="btn w-full text-white mt-6 rounded-full bg-gradient-to-r from-pink-500 to-red-600 hover:from-pink-600 hover:to-red-700"
           >
             Add Issue
           </button>

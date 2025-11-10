@@ -10,6 +10,7 @@ import PrivateRoute from "../routes/PrivateRoute";
 import AllIssues from "../Pages/AllIssues";
 import AddIssues from "../Pages/AddIssues/AddIssues";
 import IssueDetails from "../Pages/issueDetails";
+import MyIssues from "../Pages/MyIssues/MyIssues";
 
 const router = createBrowserRouter([
   {
@@ -31,14 +32,28 @@ const router = createBrowserRouter([
         loader: () => fetch("http://localhost:5000/issues"),
       },
       {
-path: "/add-issues",
-Component: AddIssues,
+        path: "/add-issues",
+        element: (
+          <PrivateRoute>
+            <AddIssues />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/my-issues",
+        element: (
+          <PrivateRoute>
+            <MyIssues />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/my-profile",
-        element: <PrivateRoute>
-          < MyProfile/>
-        </PrivateRoute>,
+        element: (
+          <PrivateRoute>
+            <MyProfile />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/login",
@@ -55,7 +70,7 @@ Component: AddIssues,
             <IssueDetails />
           </PrivateRoute>
         ),
-        loader: ({params}) => fetch(`http://localhost:5000/issues/${params.id}`),
+        loader: ({ params }) => fetch(`http://localhost:5000/issues/${params.id}`),
         hydrateFallbackElement: <Loading />,
       },
     ],
