@@ -3,50 +3,54 @@ import { AuthContext } from "../../Provider/AuthContext";
 import { toast } from "react-toastify";
 
 const AddIssues = () => {
-    const {user} = use(AuthContext)
-    const handleSubmit = (e)=> {
-        e.preventDefault();
+  const { user } = use(AuthContext);
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
-        if(!user){
-          toast.error("please log in first");
-          return;
-        }
-
-        const formData = {
-            title: e.target.title.value,
-            category: e.target.category.value,
-            location: e.target.location.value,
-            description: e.target.description.value,
-            image: e.target.image.value,
-            amount: Number(e.target.amount.value),
-            status: "ongoing",
-            email: user.email,
-            date: new Date(),
-            
-        }
-        fetch('http://localhost:5000/issues', {
-          method: "POST",
-          headers: {
-            'Content-Type' : 'application/json'
-          },
-          body: JSON.stringify(formData)
-        })
-        .then(res => res.json())
-        .then(data => {
-          if(data.success){
-            toast.success("Issue Added Successfully!")
-          }
-        })
-        .catch(err => {
-          toast.error("Failed to add issue")
-          console.log(err)
-        })
-console.log(formData)
+    if (!user) {
+      toast.error("please log in first");
+      return;
     }
+
+    const formData = {
+      title: e.target.title.value,
+      category: e.target.category.value,
+      location: e.target.location.value,
+      description: e.target.description.value,
+      image: e.target.image.value,
+      amount: Number(e.target.amount.value),
+      status: "ongoing",
+      email: user.email,
+      date: new Date(),
+    };
+    fetch("http://localhost:5000/issues", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success) {
+          toast.success("Issue Added Successfully!");
+        }
+      })
+      .catch((err) => {
+        toast.error("Failed to add issue");
+        console.log(err);
+      });
+    console.log(formData);
+  };
   return (
     <div className="card border border-gray-200 bg-base-100 w-full max-w-md mx-auto shadow-2xl rounded-2xl">
       <div className="card-body p-6 relative">
-        <h2 className="text-2xl font-bold text-center mb-6">Add <span className="bg-gradient-to-r from-green-500 via-emerald-500 to-lime-400 bg-clip-text text-transparent">Issues</span></h2>
+        <h2 className="text-2xl font-bold text-center mb-6">
+          Add{" "}
+          <span className="bg-gradient-to-r from-green-500 via-emerald-500 to-lime-400 bg-clip-text text-transparent">
+            Issues
+          </span>
+        </h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           {/* Name Field */}
           <div>
@@ -114,7 +118,7 @@ console.log(formData)
             />
           </div>
           {/* amount  */}
-            <div>
+          <div>
             <label className="label font-medium">Suggested Fix Budget</label>
             <input
               type="number"

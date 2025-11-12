@@ -79,7 +79,7 @@ doc.save('My_contribution_report.pdf');
       <div className="hidden md:block">
         <table className="w-full border-collapse text-sm md:text-base">
           <thead>
-            <tr className="bg-gray-100 text-left">
+            <tr className="bg-gray-100 text-left dark:text-black">
               <th className="p-3 border">Issue Title</th>
               <th className="p-3 border">Category</th>
               <th className="p-3 border">Paid Amount</th>

@@ -99,7 +99,7 @@ const MyIssues = () => {
 
       <div className="overflow-x-auto w-full">
         <table className="table w-full border">
-          <thead className="bg-gray-100">
+          <thead className="bg-gray-100 dark:text-black">
             <tr>
               <th>Title</th>
               <th>Category</th>

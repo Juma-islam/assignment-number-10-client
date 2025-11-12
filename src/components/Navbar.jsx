@@ -35,17 +35,14 @@ setTheme(checked ? "dark" : "light")
       <li className="font-semibold hover:text-green-500">
         <NavLink to="/">Home</NavLink>
       </li>
-      <li className="font-semibold hover:text-green-500">
+      <li className="font-semibold  hover:text-green-500">
         <NavLink to="/all-issues">All Issues</NavLink>
       </li>
-      {/* <li className="font-semibold hover:text-green-500">
-        <NavLink to="/my-profile">My Profile</NavLink>
-      </li> */}
     </>
   );
   // sticky z-50 top-0
   return (
-    <div className="navbar bg-green-100 shadow-md sticky z-50 top-0 px-4 md:px-10">
+    <div className="navbar text-black dark:text-indigo-500 bg-green-100 shadow-md sticky z-50 top-0 px-4 md:px-10">
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">

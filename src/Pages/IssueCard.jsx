@@ -11,23 +11,23 @@ const IssueCard = ({ issue }) => {
   return (
     <div className="mt-5 w-11/12 mx-auto">
       <div className="card bg-base-100 w-[100%] shadow-sm hover:scale-105 transition-transform overflow-hidden">
-        <figure className="rounded-md">
+        <figure className="rounded-md m-4 overflow-hidden">
           <img
-            className=" h-52 md:h-76 p-4 w-full object-cover rounded-md"
+            className=" h-52 md:h-76  w-full object-cover"
             src={image}
             alt="title"
           />
         </figure>
         <div className="card-body">
           <h2 className="card-title">{title}</h2>
-          <div className=" text-gray-700 font-semibold flex gap-2 items-center"><span className="text-xl text-indigo-400"><BiSolidCategory /></span> {category}</div>
-          <p className="flex gap-2 items-center text-gray-700 font-semibold ">
+          <div className=" text-gray-700 dark:text-white/80 font-semibold flex gap-2 items-center"><span className="text-xl text-indigo-400"><BiSolidCategory /></span> {category}</div>
+          <p className="flex gap-2 items-center dark:text-white/80 text-gray-700 font-semibold ">
             <span className=" text-blue-500 text-xl">
               <MdLocationPin />
             </span>
             {location}
           </p>
-          <p className="flex gap-2 items-center  text-gray-700 font-semibold">
+          <p className="flex gap-2 items-center dark:text-white/80 text-gray-700 font-semibold">
             <span className="text-xl text-green-500"><LuBadgeDollarSign /></span>{" "}{amount}</p>
 
           <Link

@@ -41,7 +41,7 @@ const AllIssues = () => {
           <option value="Resolved">Resolved</option>
         </select>
       </div>
-      <p className="text-center text-gray-700 text-sm md:text-base max-w-3xl mx-auto mb-5">
+      <p className="text-center text-gray-700 dark:text-white/80 text-sm md:text-base max-w-3xl mx-auto mb-5">
         Browse all reported issues related to garbage, road damage, and community cleanliness. Stay informed and join
         hands in making our surroundings cleaner, safer, and more sustainable.
       </p>

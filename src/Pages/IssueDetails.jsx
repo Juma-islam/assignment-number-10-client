@@ -73,21 +73,21 @@ const IssueDetails = () => {
 
           <div className="flex flex-col justify-center space-y-4 w-full md:w-1/2">
             {/* Title */}
-            <h1 className="text-3xl md:text-4xl font-bold text-gray-800">{issue.title}</h1>
+            <h1 className="text-3xl md:text-4xl  dark:text-white/80 font-bold text-gray-800">{issue.title}</h1>
 
             {/* Category Badge */}
-            <div className="badge badge-lg badge-outline text-pink-600 border-pink-600 font-medium">
+            <div className="badge  dark:text-white/80 badge-lg badge-outline text-pink-600 border-pink-600 font-medium">
               {issue.category}
             </div>
             {/* location */}
-            <div className="flex gap-2 items-center text-gray-700 font-semibold ">
+            <div className="flex  dark:text-white/80 gap-2 items-center text-gray-700 font-semibold ">
               <span className=" text-blue-500 text-xl">
                 <MdLocationPin />
               </span>
               {issue.location}
             </div>
             {/* date */}
-            <div className="flex gap-2 items-center text-gray-700 font-semibold ">
+            <div className="flex  dark:text-white/80 gap-2 items-center text-gray-700 font-semibold ">
               {" "}
               <span className=" text-blue-500 text-xl">
                 <MdDateRange />
@@ -95,14 +95,14 @@ const IssueDetails = () => {
               {issue.date}
             </div>
             {/* amount */}
-            <p className="flex gap-2 items-center  text-gray-700 font-semibold">
+            <p className="flex gap-2 items-center  dark:text-white/80  text-gray-700 font-semibold">
               <span className="text-xl text-green-500">
                 <LuBadgeDollarSign />
               </span>{" "}
               {issue.amount} (Suggested)
             </p>
             {/* Description */}
-            <p className="text-gray-600 leading-relaxed text-base md:text-lg">{issue.description}</p>
+            <p className="text-gray-600  dark:text-white/80 leading-relaxed text-base md:text-lg">{issue.description}</p>
             {/* flex gap-3 mt-6 */}
 
             <div className="mt-4">
@@ -198,9 +198,9 @@ const IssueDetails = () => {
       {/* contributions table */}
       <div className="mt-10 bg-white shadow-lg rounded-2xl p-6 border border-gray-200">
         <h2 className="text-xl font-bold mb-4">Contributions</h2>
-        <table className="table w-full">
+        <table className="table w-full ">
           <thead>
-            <tr className="bg-gray-100">
+            <tr className="bg-gray-100 dark:text-black">
               <th>Image</th>
               <th>Name</th>
               <th>Amount</th>
@@ -212,8 +212,8 @@ const IssueDetails = () => {
                 <td>
                   <img className="w-10 h-10 rounded-full" src={c.image} alt="" />
                 </td>
-                <td>{c.contributionName} </td>
-                <td className="text-green-600 font-semibold">{c.amount}</td>
+                <td className="dark:text-black" >{c.contributionName} </td>
+                <td className="text-green-600  font-semibold">{c.amount}</td>
               </tr>
             ))}
             {contributors.length === 0 && (
