@@ -1,10 +1,10 @@
 import React, { use, useEffect, useState } from "react";
-import { PiPottedPlantFill } from "react-icons/pi";
+import { AiOutlineIssuesClose } from "react-icons/ai";
 import { Link, NavLink } from "react-router";
 import { AuthContext } from "../Provider/AuthContext";
 import { toast } from "react-toastify";
 import logo from "../assets/download.png";
-// import userIcon from "../assets/user.png";
+import { FaHome } from "react-icons/fa";
 
 const Navbar = () => {
   const { user, logOut } = use(AuthContext);
@@ -31,16 +31,16 @@ const Navbar = () => {
   };
   const links = (
     <>
-      <li className="font-semibold hover:text-green-500">
-        <NavLink to="/">Home</NavLink>
+      <li className="font-semibold hover:text-indigo-500">
+        <NavLink to="/"><span><FaHome /></span>Home</NavLink>
       </li>
-      <li className="font-semibold  hover:text-green-500">
-        <NavLink to="/all-issues">All Issues</NavLink>
+      <li className="font-semibold  hover:text-indigo-500">
+        <NavLink to="/all-issues"><span><AiOutlineIssuesClose /></span>All Issues</NavLink>
       </li>
     </>
-  );
+  )
   return (
-    <div className="navbar text-black dark:text-indigo-500 bg-green-100 shadow-md sticky z-50 top-0 px-4 md:px-10">
+    <div className="navbar text-black dark:text-white bg-gradient-to-r from-green-400 via-emerald-500 to-lime-400 shadow-md sticky z-50 top-0 px-4 md:px-10">
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -58,13 +58,13 @@ const Navbar = () => {
             {links}
             {user && (
               <>
-                <li className="font-semibold hover:text-green-500">
+                <li className="font-semibold hover:text-indigo-500">
                   <NavLink to="/add-issues">Add Issues</NavLink>
                 </li>
-                <li className="font-semibold hover:text-green-500">
+                <li className="font-semibold hover:text-indigo-500">
                   <NavLink to="/my-issues">My Issues</NavLink>
                 </li>
-                <li className="font-semibold hover:text-green-500">
+                <li className="font-semibold hover:text-indigo-500">
                   <NavLink to="/my-contributions">My Contribution</NavLink>
                 </li>
                 <li className="font-semibold hover:text-green-500">
@@ -80,16 +80,16 @@ const Navbar = () => {
             )}
             <div className="flex flex-col gap-2 mt-3 lg:hidden">
               {!user && (
-                <NavLink to="/Register" className="btn  hover:text-green-500">
+                <NavLink to="/Register" className="btn  hover:text-indigo-500">
                   Register
                 </NavLink>
               )}
               {user ? (
-                <button onClick={handleLogOut} className="btn hover:text-green-500">
+                <button onClick={handleLogOut} className="btn hover:text-indigo-500">
                   Log Out
                 </button>
               ) : (
-                <NavLink to="/login" className="btn hover:text-green-500">
+                <NavLink to="/login" className="btn hover:text-indigo-500">
                   Login
                 </NavLink>
               )}
@@ -98,7 +98,7 @@ const Navbar = () => {
         </div>
         <Link to="/" className="flex gap-2 items-center text-green-600 font-bold  text-xl md:text-2xl">
           <img className="w-14 rounded-full" src={logo} alt="" />
-          CleanConnect
+          <span className="bg-gradient-to-r from-black via-gray-800 to-green-800 bg-clip-text text-transparent font-extrabold tracking-wide drop-shadow-md">CleanConnect</span>
         </Link>
       </div>
       <div className="navbar-center hidden lg:flex">
@@ -106,16 +106,16 @@ const Navbar = () => {
           {links}
           {user && (
             <>
-              <li className="font-semibold hover:text-green-500">
+              <li className="font-semibold hover:text-indigo-500">
                 <NavLink to="/add-issues">Add Issues</NavLink>
               </li>
-              <li className="font-semibold hover:text-green-500">
+              <li className="font-semibold hover:text-indigo-500">
                 <NavLink to="/my-issues">My Issues</NavLink>
               </li>
               <li className="font-semibold hover:text-green-500">
                 <NavLink to="/my-contributions">My Contributions</NavLink>
               </li>
-              <li className="font-semibold hover:text-green-500">
+              <li className="font-semibold hover:text-indigo-500">
                 <NavLink to="/my-profile">My Profile</NavLink>
               </li>
             </>
@@ -135,7 +135,7 @@ const Navbar = () => {
               tabIndex={0}
               className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
             >
-              <li className="text-center font-semibold text-green-700">{user.displayName || "user"}</li>
+              <li className="text-center font-semibold hover:text-indigo-500">{user.displayName || "user"}</li>
               <li>
                 <button
                   onClick={handleLogOut}

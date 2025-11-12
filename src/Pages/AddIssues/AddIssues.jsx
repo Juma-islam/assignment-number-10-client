@@ -40,7 +40,6 @@ const AddIssues = () => {
         toast.error("Failed to add issue");
         console.log(err);
       });
-    
   };
   return (
     <div className="card border border-gray-200 bg-base-100 w-full max-w-md mx-auto shadow-2xl rounded-2xl">
