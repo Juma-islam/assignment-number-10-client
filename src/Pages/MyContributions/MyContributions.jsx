@@ -11,7 +11,7 @@ const MyContributions = () => {
     useEffect(()=> {
 
         if(!user) return;
-            fetch(`http://localhost:5000/contributions?email=${user.email}`)
+            fetch(`https://clean-connect-project.vercel.app/contributions?email=${user.email}`)
             .then((res)=> res.json())
             .then(data => setContributions(data.result || []))
         

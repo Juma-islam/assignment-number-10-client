@@ -13,7 +13,7 @@ const MyIssues = () => {
      const navigate = useNavigate()
 
     useEffect(()=> {
-        fetch(`http://localhost:5000/my-issues/${user.email}`)
+        fetch(`https://clean-connect-project.vercel.app/my-issues/${user.email}`)
         .then(res => res.json())
         .then(data => {
             if(data.success) setIssues(data.result);
@@ -36,7 +36,7 @@ const MyIssues = () => {
             status: e.target.status.value,
         };
 
-        fetch(`http://localhost:5000/issues/${selectedIssue._id}`,{
+        fetch(`https://clean-connect-project.vercel.app/issues/${selectedIssue._id}`,{
             method: "PUT",
             headers: {
                 "Content-Type": "application/json"
@@ -66,7 +66,7 @@ const MyIssues = () => {
   confirmButtonText: "Yes, delete it!"
 }).then((result) => {
   if (result.isConfirmed) {      
-    fetch(`http://localhost:5000/issues/${id}`, {
+    fetch(`https://clean-connect-project.vercel.app/issues/${id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -78,7 +78,7 @@ const MyIssues = () => {
           setIssues(prev => prev.filter(issue => issue._id !== id));
           Swal.fire("Deleted!", "Your issue has been deleted.", "success");
         }
-      console.log(data)
+      // console.log(data)
       navigate('/all-issues')
 
          Swal.fire({

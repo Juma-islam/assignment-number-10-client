@@ -13,7 +13,7 @@ const IssueDetails = () => {
   const [contributors, setContributors] = useState([]);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/contributions?issueId=${issue._id}`)
+    fetch(`https://clean-connect-project.vercel.app/contributions?issueId=${issue._id}`)
       .then((res) => res.json())
       .then((data) => setContributors(Array.isArray(data) ? data : []));
   }, [issue._id]);
@@ -42,7 +42,7 @@ const IssueDetails = () => {
       category: issue.category,
     };
 
-    fetch("http://localhost:5000/contributions", {
+    fetch("https://clean-connect-project.vercel.app/contributions", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

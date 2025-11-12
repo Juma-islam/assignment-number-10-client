@@ -8,7 +8,7 @@ const AllIssues = () => {
   const [status, setStatus] = useState("");
 
   useEffect(() => {
-    let url = "http://localhost:5000/issues?";
+    let url = "https://clean-connect-project.vercel.app/issues?";
     if(category) url += `category=${category}&`;
     if(status) url += `status=${status}&`;
 

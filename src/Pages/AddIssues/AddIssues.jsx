@@ -23,7 +23,7 @@ const AddIssues = () => {
       email: user.email,
       date: new Date(),
     };
-    fetch("http://localhost:5000/issues", {
+    fetch("https://clean-connect-project.vercel.app/issues", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -40,7 +40,7 @@ const AddIssues = () => {
         toast.error("Failed to add issue");
         console.log(err);
       });
-    console.log(formData);
+    
   };
   return (
     <div className="card border border-gray-200 bg-base-100 w-full max-w-md mx-auto shadow-2xl rounded-2xl">

@@ -24,14 +24,14 @@ const router = createBrowserRouter([
         index: true,
         Component: Home,
         hydrateFallbackElement: <Loading></Loading>,
-        loader: () => fetch("http://localhost:5000/latest-issues"),
+        loader: () => fetch("https://clean-connect-project.vercel.app/latest-issues"),
       },
 
       {
         path: "/all-issues",
         Component: AllIssues,
         hydrateFallbackElement: <Loading />,
-        loader: () => fetch("http://localhost:5000/issues"),
+        loader: () => fetch("https://clean-connect-project.vercel.app/issues"),
       },
       {
         path: "/add-issues",
@@ -80,7 +80,7 @@ const router = createBrowserRouter([
             <IssueDetails />
           </PrivateRoute>
         ),
-        loader: ({ params }) => fetch(`http://localhost:5000/issues/${params.id}`),
+        loader: ({ params }) => fetch(`https://clean-connect-project.vercel.app/issues/${params.id}`),
         hydrateFallbackElement: <Loading />,
       },
     ],
