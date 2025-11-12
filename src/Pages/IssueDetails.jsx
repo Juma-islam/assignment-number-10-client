@@ -23,8 +23,8 @@ const IssueDetails = () => {
   };
   const handleContributionSubmit = (e) => {
     e.preventDefault();
-    if(!user){
-      toast.error("please log in first")
+    if (!user) {
+      toast.error("please log in first");
       return;
     }
 
@@ -61,10 +61,11 @@ const IssueDetails = () => {
   };
 
   const totalCollected = Array.isArray(contributors)
-  ? contributors.reduce((sum, item) => sum + parseFloat(item.amount || 0), 0)
-  : 0;
+    ? contributors.reduce((sum, item) => sum + parseFloat(item.amount || 0), 0)
+    : 0;
   return (
     <div className="max-w-5xl mx-auto p-4 md:p-6 lg:p-8">
+      <title>Issue Details Page</title>
       <div className="card bg-base-100 shadow-xl border border-gray-200 rounded-2xl overflow-hidden">
         <div className="flex flex-col md:flex-row gap-8 p-6 md:p-8">
           <div className="shrink-0 w-full md:w-1/2">
@@ -102,7 +103,9 @@ const IssueDetails = () => {
               {issue.amount} (Suggested)
             </p>
             {/* Description */}
-            <p className="text-gray-600  dark:text-white/80 leading-relaxed text-base md:text-lg">{issue.description}</p>
+            <p className="text-gray-600  dark:text-white/80 leading-relaxed text-base md:text-lg">
+              {issue.description}
+            </p>
             {/* flex gap-3 mt-6 */}
 
             <div className="mt-4">
@@ -212,15 +215,17 @@ const IssueDetails = () => {
                 <td>
                   <img className="w-10 h-10 rounded-full" src={c.image} alt="" />
                 </td>
-                <td className="dark:text-black" >{c.contributionName} </td>
+                <td className="dark:text-black">{c.contributionName} </td>
                 <td className="text-green-600  font-semibold">{c.amount}</td>
               </tr>
             ))}
             {contributors.length === 0 && (
-                <tr>
-                <td colSpan="5" className="text-center py-4 text-gray-500">No Contributions yet</td>
-                </tr>
-              )}
+              <tr>
+                <td colSpan="5" className="text-center py-4 text-gray-500">
+                  No Contributions yet
+                </td>
+              </tr>
+            )}
           </tbody>
         </table>
       </div>

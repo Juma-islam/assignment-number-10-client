@@ -63,6 +63,7 @@ doc.save('My_contribution_report.pdf');
 
     return (
          <div className="p-4">
+          <title>My Contributions Page</title>
       <h2 className="text-2xl font-semibold mb-4 text-center">My Contributions</h2>
 
       {/* ✅ Download PDF Button */}
