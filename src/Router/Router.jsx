@@ -23,7 +23,7 @@ const router = createBrowserRouter([
         index: true,
         Component: Home,
         hydrateFallbackElement: <Loading></Loading>,
-        loader: () => fetch("/plants.json"),
+        loader: () => fetch("http://localhost:5000/latest-issues"),
       },
 
       {

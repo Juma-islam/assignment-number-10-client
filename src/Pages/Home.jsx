@@ -9,7 +9,6 @@ import IssueCard from "./IssueCard";
 
 const Home = () => {
   const data = useLoaderData();
-  const sortedPlants = [...data].sort((a, b) => b.rating - a.rating);
   return (
     <div className="">
       <title>Home Page</title>
@@ -21,7 +20,7 @@ const Home = () => {
         air, boost mood, and bring peaceful energy to your space.
       </p>
       <div className="grid md:grid-cols-3 bg-green-50 gap-5 w-11/12 mx-auto">
-        {sortedPlants.slice(0, 6).map((issue) => (
+        {data.map((issue) => (
           <IssueCard key={issue._id} issue={issue}></IssueCard>
         ))}
       </div>
