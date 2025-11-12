@@ -27,9 +27,9 @@ const Home = () => {
       </div>
       <CommunityStats></CommunityStats>
       <VolunteerCTA></VolunteerCTA>
-      <PlantCareTips></PlantCareTips>
-      <GreenExperts></GreenExperts>
-      <PlantOfWeek></PlantOfWeek>
+      {/* <PlantCareTips></PlantCareTips> */}
+      {/* <GreenExperts></GreenExperts>
+      <PlantOfWeek></PlantOfWeek> */}
     </div>
   );
 };

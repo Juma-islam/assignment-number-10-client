@@ -109,7 +109,7 @@ const MyIssues = () => {
             </tr>
           </thead>
           <tbody>
-            {issues.map(issue => (
+          {issues.map(issue => (
               <tr key={issue._id}>
                 <td>{issue.title}</td>
                 <td>{issue.category}</td>
@@ -131,6 +131,13 @@ const MyIssues = () => {
                 </td>
               </tr>
             ))}
+            {issues.length === 0 && (
+              <tr>
+                <td className='text-center py-4 text-gray-500'>
+                  No issues found
+                </td>
+              </tr>
+            )}
           </tbody>
         </table>
       </div>
@@ -185,7 +192,7 @@ const MyIssues = () => {
             </form>
           )}
           <div className="modal-action">
-            <button className="btn">Close</button>
+            <button onClick={()=> updateModalRef.current.close()} className="btn">Close</button>
           </div>
         </div>
       </dialog>

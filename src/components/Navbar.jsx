@@ -69,7 +69,10 @@ setTheme(checked ? "dark" : "light")
           <NavLink to="/my-issues">My Issues</NavLink>
         </li>
         <li className="font-semibold hover:text-green-500">
-          <NavLink to="/my-contribution">My Contribution</NavLink>
+          <NavLink to="/my-contributions">My Contribution</NavLink>
+        </li>
+        <li className="font-semibold hover:text-green-500">
+          <NavLink to="/my-profile">My Profile</NavLink>
         </li>
           </>}
             <div className="flex flex-col gap-2 mt-3 lg:hidden">
@@ -106,6 +109,9 @@ setTheme(checked ? "dark" : "light")
         </li>
         <li className="font-semibold hover:text-green-500">
           <NavLink to="/my-contributions">My Contributions</NavLink>
+        </li>
+        <li className="font-semibold hover:text-green-500">
+          <NavLink to="/my-profile">My Profile</NavLink>
         </li>
           </>}
            </ul>

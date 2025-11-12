@@ -9,11 +9,12 @@ const MyContributions = () => {
     const [contributions, setContributions] = useState([]);
 
     useEffect(()=> {
-        if(user?.email){
+
+        if(!user) return;
             fetch(`http://localhost:5000/contributions?email=${user.email}`)
             .then((res)=> res.json())
             .then(data => setContributions(data.result || []))
-        }
+        
     }, [user]);
     
     // pdf download collection 
@@ -103,6 +104,11 @@ doc.save('My_contribution_report.pdf');
                 </td>
               </tr>
             ))}
+             {contributions.length === 0 && (
+                <tr>
+                <td colSpan="5" className="text-center py-4 text-gray-500">No Contributions found</td>
+                </tr>
+              )}
           </tbody>
         </table>
       </div>

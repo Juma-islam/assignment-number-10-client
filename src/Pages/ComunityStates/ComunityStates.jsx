@@ -2,7 +2,7 @@ const CommunityStats = ({ users, resolved, pending }) => {
   const stats = [
     { title: "Registered Users", value: users, icon: "👥" },
     { title: "issues Resolved", value: resolved, icon: "✅" },
-    { title: "Registered Users", value: pending, icon: "⏳" },
+    { title: "Pending Issues", value: pending, icon: "⏳" },
   ];
 
   return (

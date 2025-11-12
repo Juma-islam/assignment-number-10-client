@@ -23,6 +23,10 @@ const IssueDetails = () => {
   };
   const handleContributionSubmit = (e) => {
     e.preventDefault();
+    if(!user){
+      toast.error("please log in first")
+      return;
+    }
 
     const contribution = {
       issueId: issue._id,
@@ -212,6 +216,11 @@ const IssueDetails = () => {
                 <td className="text-green-600 font-semibold">{c.amount}</td>
               </tr>
             ))}
+            {contributors.length === 0 && (
+                <tr>
+                <td colSpan="5" className="text-center py-4 text-gray-500">No Contributions yet</td>
+                </tr>
+              )}
           </tbody>
         </table>
       </div>

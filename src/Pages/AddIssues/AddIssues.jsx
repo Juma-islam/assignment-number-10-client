@@ -7,6 +7,11 @@ const AddIssues = () => {
     const handleSubmit = (e)=> {
         e.preventDefault();
 
+        if(!user){
+          toast.error("please log in first");
+          return;
+        }
+
         const formData = {
             title: e.target.title.value,
             category: e.target.category.value,

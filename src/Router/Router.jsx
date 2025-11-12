@@ -1,7 +1,7 @@
 import { createBrowserRouter, Router } from "react-router";
 import Home from "../Pages/Home";
 import MainLayouts from "../Layouts/MainLayouts";
-import MyProfile from "../Pages/MyProfile";
+// import MyProfile from "../Pages/MyProfile";
 import Login from "../Pages/Login";
 import Register from "../Pages/Register";
 import ErrorPage from "../Pages/ErrorPage";
@@ -12,6 +12,7 @@ import AddIssues from "../Pages/AddIssues/AddIssues";
 import IssueDetails from "../Pages/issueDetails";
 import MyIssues from "../Pages/MyIssues/MyIssues";
 import MyContributions from "../Pages/MyContributions/MyContributions";
+import MyProfile from "../Pages/MyProfile";
 
 const router = createBrowserRouter([
   {
