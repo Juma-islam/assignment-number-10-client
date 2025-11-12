@@ -1,9 +1,11 @@
-import React from "react";
+
 import { useLoaderData } from "react-router";
 import IssueCard from "./IssueCard";
 
 const AllIssues = () => {
   const issues = useLoaderData();
+
+
   return (
     <div className="w-11/12 mx-auto my-3">
       <title>All Issues</title>
@@ -15,9 +17,12 @@ const AllIssues = () => {
         hands in making our surroundings cleaner, safer, and more sustainable.
       </p>
       <div className="grid md:grid-cols-3 bg-green-100 gap-6">
-        {issues.map((issue) => (
-          <IssueCard key={issue._id} issue={issue} />
-        ))}
+        {
+          issues.map(issue => (
+            <IssueCard key={issue._id} issue={issue}></IssueCard>
+          ))
+        }
+        
       </div>
     </div>
   );

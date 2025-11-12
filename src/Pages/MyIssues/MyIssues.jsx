@@ -95,7 +95,7 @@ const MyIssues = () => {
  }
     return (
         <div className="p-6 max-w-6xl mx-auto">
-      <h1 className="text-3xl font-bold mb-6 text-center">My Issues</h1>
+      <h1 className="text-3xl font-bold mb-6 text-center">My <span className='bg-gradient-to-r from-green-500 via-emerald-500 to-lime-400 bg-clip-text text-transparent'>Issues</span></h1>
 
       <div className="overflow-x-auto w-full">
         <table className="table w-full border">

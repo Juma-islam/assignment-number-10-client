@@ -41,7 +41,7 @@ console.log(formData)
   return (
     <div className="card border border-gray-200 bg-base-100 w-full max-w-md mx-auto shadow-2xl rounded-2xl">
       <div className="card-body p-6 relative">
-        <h2 className="text-2xl font-bold text-center mb-6">Add Issues</h2>
+        <h2 className="text-2xl font-bold text-center mb-6">Add <span className="bg-gradient-to-r from-green-500 via-emerald-500 to-lime-400 bg-clip-text text-transparent">Issues</span></h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           {/* Name Field */}
           <div>

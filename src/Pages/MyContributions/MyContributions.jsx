@@ -17,7 +17,7 @@ const MyContributions = () => {
     return (
          <div className="p-4">
       <h2 className="text-2xl font-semibold mb-4 text-center">
-        My Contributions
+        My <span className='bg-gradient-to-r from-green-500 via-emerald-500 to-lime-400 bg-clip-text text-transparent'>Contributions</span>
       </h2>
 
       {/* 🖥️ Desktop/Table View */}

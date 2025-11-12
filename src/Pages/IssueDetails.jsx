@@ -12,11 +12,11 @@ const IssueDetails = () => {
   const { user } = use(AuthContext);
   const [contributors, setContributors] = useState([]);
 
-  useEffect(()=> {
+  useEffect(() => {
     fetch(`http://localhost:5000/contributions?issueId=${issue._id}`)
-.then(res => res.json())
-.then(data => setContributors(data)); 
-  }, [issue._id])
+      .then((res) => res.json())
+      .then((data) => setContributors(data));
+  }, [issue._id]);
 
   const handleModalOpen = () => {
     issueModalRef.current.showModal();
@@ -103,7 +103,7 @@ const IssueDetails = () => {
               <p className="font-semibold">
                 Collected: {totalCollected} / {issue.amount}
               </p>
-               <progress
+              <progress
                 className="progress progress-success w-full"
                 value={totalCollected}
                 max={issue.amount}
@@ -189,7 +189,7 @@ const IssueDetails = () => {
           </div>
         </div>
       </div>
-       {/* contributions table */}
+      {/* contributions table */}
       <div className="mt-10 bg-white shadow-lg rounded-2xl p-6 border border-gray-200">
         <h2 className="text-xl font-bold mb-4">Contributions</h2>
         <table className="table w-full">

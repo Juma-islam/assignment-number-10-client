@@ -1,4 +1,4 @@
-import React, { use } from "react";
+import React, { use, useEffect, useState } from "react";
 import { PiPottedPlantFill } from "react-icons/pi";
 import { Link, NavLink } from "react-router";
 import { AuthContext } from "../Provider/AuthContext";
@@ -7,7 +7,16 @@ import logo from "../assets/download.png";
 // import userIcon from "../assets/user.png";
 
 const Navbar = () => {
+
   const { user, logOut } = use(AuthContext);
+  const [theme, setTheme] = useState(localStorage.getItem('theme') || "light");
+
+  useEffect(()=> {
+const html = document.querySelector('html');
+ html.setAttribute("data-theme", theme)
+ localStorage.setItem('theme', theme)
+  }, [theme])
+  
   const handleLogOut = () => {
     logOut()
       .then(() => {
@@ -17,6 +26,10 @@ const Navbar = () => {
         console.log(error);
       });
   };
+
+  const handleTheme = (checked)=> {
+setTheme(checked ? "dark" : "light")
+  }
   const links = (
     <>
       <li className="font-semibold hover:text-green-500">
@@ -140,7 +153,11 @@ const Navbar = () => {
             </ul>
           </div>
         )}
-        <div className=""></div>
+        {/* theme  */}
+        <div className="">
+          <input onChange={(e) => handleTheme(e.target.checked)} 
+          checked={theme === "dark"} type="checkbox" className="toggle"/>
+        </div>
       </div>
     </div>
   );
