@@ -7,16 +7,15 @@ import logo from "../assets/download.png";
 // import userIcon from "../assets/user.png";
 
 const Navbar = () => {
-
   const { user, logOut } = use(AuthContext);
-  const [theme, setTheme] = useState(localStorage.getItem('theme') || "light");
+  const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
 
-  useEffect(()=> {
-const html = document.querySelector('html');
- html.setAttribute("data-theme", theme)
- localStorage.setItem('theme', theme)
-  }, [theme])
-  
+  useEffect(() => {
+    const html = document.querySelector("html");
+    html.setAttribute("data-theme", theme);
+    localStorage.setItem("theme", theme);
+  }, [theme]);
+
   const handleLogOut = () => {
     logOut()
       .then(() => {
@@ -27,9 +26,9 @@ const html = document.querySelector('html');
       });
   };
 
-  const handleTheme = (checked)=> {
-setTheme(checked ? "dark" : "light")
-  }
+  const handleTheme = (checked) => {
+    setTheme(checked ? "dark" : "light");
+  };
   const links = (
     <>
       <li className="font-semibold hover:text-green-500">
@@ -40,7 +39,6 @@ setTheme(checked ? "dark" : "light")
       </li>
     </>
   );
-  // sticky z-50 top-0
   return (
     <div className="navbar text-black dark:text-indigo-500 bg-green-100 shadow-md sticky z-50 top-0 px-4 md:px-10">
       <div className="navbar-start">
@@ -58,20 +56,28 @@ setTheme(checked ? "dark" : "light")
           </div>
           <ul tabIndex={0} className="menu menu-sm dropdown-content bg-white rounded-box z-1 mt-3 w-52 p-2 shadow-md">
             {links}
-             {user && <>
-               <li className="font-semibold hover:text-green-500">
-          <NavLink to="/add-issues">Add Issues</NavLink>
-        </li>
-        <li className="font-semibold hover:text-green-500">
-          <NavLink to="/my-issues">My Issues</NavLink>
-        </li>
-        <li className="font-semibold hover:text-green-500">
-          <NavLink to="/my-contributions">My Contribution</NavLink>
-        </li>
-        <li className="font-semibold hover:text-green-500">
-          <NavLink to="/my-profile">My Profile</NavLink>
-        </li>
-          </>}
+            {user && (
+              <>
+                <li className="font-semibold hover:text-green-500">
+                  <NavLink to="/add-issues">Add Issues</NavLink>
+                </li>
+                <li className="font-semibold hover:text-green-500">
+                  <NavLink to="/my-issues">My Issues</NavLink>
+                </li>
+                <li className="font-semibold hover:text-green-500">
+                  <NavLink to="/my-contributions">My Contribution</NavLink>
+                </li>
+                <li className="font-semibold hover:text-green-500">
+                  <NavLink to="/my-profile">My Profile</NavLink>
+                </li>
+                <input
+            onChange={(e) => handleTheme(e.target.checked)}
+            checked={theme === "dark"}
+            type="checkbox"
+            className="toggle"
+          />
+              </>
+            )}
             <div className="flex flex-col gap-2 mt-3 lg:hidden">
               {!user && (
                 <NavLink to="/Register" className="btn  hover:text-green-500">
@@ -96,22 +102,25 @@ setTheme(checked ? "dark" : "light")
         </Link>
       </div>
       <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1 gap-3">{links}
-          {user && <>
-               <li className="font-semibold hover:text-green-500">
-          <NavLink to="/add-issues">Add Issues</NavLink>
-        </li>
-        <li className="font-semibold hover:text-green-500">
-          <NavLink to="/my-issues">My Issues</NavLink>
-        </li>
-        <li className="font-semibold hover:text-green-500">
-          <NavLink to="/my-contributions">My Contributions</NavLink>
-        </li>
-        <li className="font-semibold hover:text-green-500">
-          <NavLink to="/my-profile">My Profile</NavLink>
-        </li>
-          </>}
-           </ul>
+        <ul className="menu menu-horizontal px-1 gap-3">
+          {links}
+          {user && (
+            <>
+              <li className="font-semibold hover:text-green-500">
+                <NavLink to="/add-issues">Add Issues</NavLink>
+              </li>
+              <li className="font-semibold hover:text-green-500">
+                <NavLink to="/my-issues">My Issues</NavLink>
+              </li>
+              <li className="font-semibold hover:text-green-500">
+                <NavLink to="/my-contributions">My Contributions</NavLink>
+              </li>
+              <li className="font-semibold hover:text-green-500">
+                <NavLink to="/my-profile">My Profile</NavLink>
+              </li>
+            </>
+          )}
+        </ul>
       </div>
 
       <div className="navbar-end gap-3 hidden:lg-flex">
@@ -126,7 +135,7 @@ setTheme(checked ? "dark" : "light")
               tabIndex={0}
               className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
             >
-            <li className="text-center font-semibold text-green-700">{user.displayName || "user"}</li>
+              <li className="text-center font-semibold text-green-700">{user.displayName || "user"}</li>
               <li>
                 <button
                   onClick={handleLogOut}
@@ -152,14 +161,17 @@ setTheme(checked ? "dark" : "light")
               >
                 Register
               </NavLink>
-         
             </ul>
           </div>
         )}
         {/* theme  */}
-        <div className="">
-          <input onChange={(e) => handleTheme(e.target.checked)} 
-          checked={theme === "dark"} type="checkbox" className="toggle"/>
+        <div className="hidden md:inline">
+          <input
+            onChange={(e) => handleTheme(e.target.checked)}
+            checked={theme === "dark"}
+            type="checkbox"
+            className="toggle"
+          />
         </div>
       </div>
     </div>
