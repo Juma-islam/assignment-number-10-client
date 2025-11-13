@@ -32,13 +32,23 @@ const Navbar = () => {
   const links = (
     <>
       <li className="font-semibold hover:text-indigo-500">
-        <NavLink to="/"><span><FaHome /></span>Home</NavLink>
+        <NavLink to="/">
+          <span>
+            <FaHome />
+          </span>
+          Home
+        </NavLink>
       </li>
       <li className="font-semibold  hover:text-indigo-500">
-        <NavLink to="/all-issues"><span><AiOutlineIssuesClose /></span>All Issues</NavLink>
+        <NavLink to="/all-issues">
+          <span>
+            <AiOutlineIssuesClose />
+          </span>
+          All Issues
+        </NavLink>
       </li>
     </>
-  )
+  );
   return (
     <div className="navbar text-black dark:text-white bg-gradient-to-r from-green-400 via-emerald-500 to-lime-400 shadow-md sticky z-50 top-0 px-4 md:px-10">
       <div className="navbar-start">
@@ -70,12 +80,12 @@ const Navbar = () => {
                 <li className="font-semibold hover:text-indigo-500 dark:text-black">
                   <NavLink to="/my-profile">My Profile</NavLink>
                 </li>
-                <input
-            onChange={(e) => handleTheme(e.target.checked)}
-            checked={theme === "dark"}
-            type="checkbox"
-            className="toggle"
-          />
+                 <input
+                  onChange={(e) => handleTheme(e.target.checked)}
+                  checked={theme === "dark"}
+                  type="checkbox"
+                  className="toggle"
+                />
               </>
             )}
             <div className="flex flex-col gap-2 mt-3 lg:hidden">
@@ -89,16 +99,21 @@ const Navbar = () => {
                   Log Out
                 </button>
               ) : (
-                <NavLink to="/login" className="btn hover:text-indigo-500">
-                  Login
-                </NavLink>
+                <input
+                  onChange={(e) => handleTheme(e.target.checked)}
+                  checked={theme === "dark"}
+                  type="checkbox"
+                  className="toggle"
+                />
               )}
             </div>
           </ul>
         </div>
         <Link to="/" className="flex gap-2 items-center text-green-600 font-bold  text-xl md:text-2xl">
           <img className="w-14 rounded-full" src={logo} alt="" />
-          <span className="bg-gradient-to-r from-black via-gray-800 to-green-800 bg-clip-text text-transparent font-extrabold tracking-wide drop-shadow-md">CleanConnect</span>
+          <span className="bg-gradient-to-r from-black via-gray-800 to-green-800 bg-clip-text text-transparent font-extrabold tracking-wide drop-shadow-md">
+            CleanConnect
+          </span>
         </Link>
       </div>
       <div className="navbar-center hidden lg:flex">
