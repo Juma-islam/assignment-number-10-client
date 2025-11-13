@@ -21,7 +21,7 @@ const AddIssues = () => {
       amount: Number(e.target.amount.value),
       status: "ongoing",
       email: user.email,
-      date: new Date().toISOString(),
+      date: new Date().toISOString().split("T")[0],
     };
     fetch("https://clean-connect-project.vercel.app/issues", {
       method: "POST",

@@ -19,7 +19,7 @@ const Home = () => {
       </p>
       <div className="grid md:grid-cols-3 bg-green-50 gap-5 w-11/12 mx-auto">
         {data.map((issue) => (
-          <IssueCard key={issue._id} issue={issue}></IssueCard>
+          <IssueCard key={issue._id} issue={issue} showAmount={false}></IssueCard>
         ))}
       </div>
       <CommunityStats></CommunityStats>

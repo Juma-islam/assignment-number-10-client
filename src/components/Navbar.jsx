@@ -58,16 +58,16 @@ const Navbar = () => {
             {links}
             {user && (
               <>
-                <li className="font-semibold hover:text-indigo-500">
+                <li className="font-semibold hover:text-indigo-500 dark:text-black">
                   <NavLink to="/add-issues">Add Issues</NavLink>
                 </li>
-                <li className="font-semibold hover:text-indigo-500">
+                <li className="font-semibold hover:text-indigo-500 dark:text-black">
                   <NavLink to="/my-issues">My Issues</NavLink>
                 </li>
-                <li className="font-semibold hover:text-indigo-500">
-                  <NavLink to="/my-contributions">My Contribution</NavLink>
+                <li className="font-semibold hover:text-indigo-500 dark:text-black">
+                  <NavLink to="/my-contributions">My Contributions</NavLink>
                 </li>
-                <li className="font-semibold hover:text-green-500">
+                <li className="font-semibold hover:text-indigo-500 dark:text-black">
                   <NavLink to="/my-profile">My Profile</NavLink>
                 </li>
                 <input
@@ -112,7 +112,7 @@ const Navbar = () => {
               <li className="font-semibold hover:text-indigo-500">
                 <NavLink to="/my-issues">My Issues</NavLink>
               </li>
-              <li className="font-semibold hover:text-green-500">
+              <li className="font-semibold hover:text-indigo-500">
                 <NavLink to="/my-contributions">My Contributions</NavLink>
               </li>
               <li className="font-semibold hover:text-indigo-500">

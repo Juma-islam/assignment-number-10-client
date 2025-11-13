@@ -48,7 +48,7 @@ const AllIssues = () => {
       <div className="grid md:grid-cols-3 bg-green-100 gap-6">
         {
           issues.length > 0 ? (
-            issues.map((issue) => <IssueCard key={issue._id} issue={issue}/>)
+            issues.map((issue) => <IssueCard key={issue._id} issue={issue} showAmount={true}/>)
           )
           : (
             <p className="text-center col-span-3 text-gray-600">No issues found</p>
