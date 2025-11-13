@@ -16,10 +16,10 @@ const MyContributions = () => {
 
   const handleDownloadPDF = () => {
     const doc = new jsPDF();
- 
+
     doc.setFontSize(18);
     doc.text("Clean - contribution Report", 14, 20);
-   
+
     doc.setFontSize(12);
     doc.text(`name: ${user?.displayName || "N/A"}`, 14, 30);
     doc.text(`Email: ${user?.email}`, 14, 37);

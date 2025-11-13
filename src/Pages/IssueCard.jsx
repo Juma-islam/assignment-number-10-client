@@ -3,7 +3,7 @@ import { LuBadgeDollarSign } from "react-icons/lu";
 import { Link } from "react-router";
 import { MdLocationPin } from "react-icons/md";
 
-// Each card: title, short description, category, location, and a “See Details” button
+
 const IssueCard = ({ issue, showAmount = false }) => {
   const { image, title, category, location, amount, description } = issue;
   return (
@@ -15,7 +15,9 @@ const IssueCard = ({ issue, showAmount = false }) => {
         <div className="card-body">
           <h2 className="card-title">{title}</h2>
           <p className="badge text-xs badge-xs badge-secondary rounded-full dark:text-white/80 "> {category}</p>
-          {!showAmount && <p className="text-gray-700 dark:text-white/70 text-sm mb-2">{description?.slice(0, 80)}...</p>}
+          {!showAmount && (
+            <p className="text-gray-700 dark:text-white/70 text-sm mb-2">{description?.slice(0, 80)}...</p>
+          )}
           <p className="flex gap-2 items-center dark:text-white/80 text-gray-700 font-semibold ">
             <span className=" text-blue-500 text-xl">
               <MdLocationPin />
@@ -40,7 +42,6 @@ const IssueCard = ({ issue, showAmount = false }) => {
         </div>
       </div>
     </div>
-    // </div>
   );
 };
 

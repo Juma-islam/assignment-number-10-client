@@ -52,7 +52,7 @@ const AddIssues = () => {
           </span>
         </h2>
         <form onSubmit={handleSubmit} className="space-y-4">
-          {/* Name Field */}
+          {/* Title Field */}
           <div>
             <label className="label font-medium">Title</label>
             <input
@@ -60,7 +60,7 @@ const AddIssues = () => {
               name="title"
               required
               className="input w-full rounded-full focus:border-0 focus:outline-gray-200"
-              placeholder="Enter name"
+              placeholder="Enter title"
             />
           </div>
 
@@ -106,7 +106,7 @@ const AddIssues = () => {
             ></textarea>
           </div>
 
-          {/* Thumbnail URL */}
+          {/* image URL */}
           <div>
             <label className="label font-medium">Image URL</label>
             <input
