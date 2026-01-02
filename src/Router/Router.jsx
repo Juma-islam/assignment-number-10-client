@@ -12,6 +12,16 @@ import AddIssues from "../Pages/AddIssues/AddIssues";
 import IssueDetails from "../Pages/issueDetails";
 import MyIssues from "../Pages/MyIssues/MyIssues";
 import MyContributions from "../Pages/MyContributions/MyContributions";
+// import MyProfile from "../Pages/MyProfile";
+import DashboardLayouts from "../Layouts/DashboardLayouts";
+import AboutUs from "../Pages/AboutUs/AboutUs";
+import Contact from "../Pages/Contact/Contact";
+import PrivacyPolicy from "../Pages/ContributionsTable/PrivacyPolicy/PrivacyPolicy";
+import TermsOfService from "../Pages/FooterPages/TermsOfService/TermsOfService";
+import BlogHelp from "../Pages/FooterPages/BlogHelp/BlogHelp";
+import FAQ from "../Pages/FooterPages/FAQ/FAQ";
+import HelpCenter from "../Pages/FooterPages/HelpCenter/HelpCenter";
+import DashboardHome from "../Pages/DashboardPages/DashboardHome";
 import MyProfile from "../Pages/MyProfile";
 
 const router = createBrowserRouter([
@@ -34,37 +44,58 @@ const router = createBrowserRouter([
         loader: () => fetch("https://clean-connect-project.vercel.app/issues"),
       },
       {
-        path: "/add-issues",
-        element: (
-          <PrivateRoute>
-            <AddIssues />
-          </PrivateRoute>
-        ),
+        path: '/about',
+        Component: AboutUs
       },
       {
-        path: "/my-issues",
-        element: (
-          <PrivateRoute>
-            <MyIssues />
-          </PrivateRoute>
-        ),
+        path: '/contact',
+        Component: Contact
       },
       {
-        path: "/my-contributions",
-        element: (
-          <PrivateRoute>
-            <MyContributions />
-          </PrivateRoute>
-        ),
+        path: '/privacy',
+        Component: PrivacyPolicy
       },
       {
-        path: "/my-profile",
-        element: (
-          <PrivateRoute>
-            <MyProfile />
-          </PrivateRoute>
-        ),
+        path: '/terms',
+        Component: TermsOfService
       },
+      {
+        path: '/blog',
+        Component: BlogHelp
+      },
+      {
+        path: '/faq',
+        Component: FAQ
+      },
+      {
+        path: '/help',
+        Component: HelpCenter
+      },
+      // {
+      //   path: "/add-issues",
+      //   element: (
+      //     <PrivateRoute>
+      //       <AddIssues />
+      //     </PrivateRoute>
+      //   ),
+      // },
+      // {
+      //   path: "/my-issues",
+      //   element: (
+      //     <PrivateRoute>
+      //       <MyIssues />
+      //     </PrivateRoute>
+      //   ),
+      // },
+      // {
+      //   path: "/my-contributions",
+      //   element: (
+      //     <PrivateRoute>
+      //       <MyContributions />
+      //     </PrivateRoute>
+      //   ),
+      // },
+  
       {
         path: "/login",
         Component: Login,
@@ -85,6 +116,32 @@ const router = createBrowserRouter([
       },
     ],
   },
+ {
+    path: "/dashboard",
+    element: <PrivateRoute><DashboardLayouts /></PrivateRoute>,
+    children: [
+      {
+        index: true, 
+        element: <DashboardHome />
+      },
+      {
+        path: "my-issues",
+        element: <MyIssues />
+      },
+      {
+        path: "add-issue",
+        element: <AddIssues />
+      },
+      {
+        path: "my-contributions",
+        element: <MyContributions />
+      },
+      {
+        path: "my-profile",
+        element: <MyProfile />
+      },
+    ]
+  }
 ]);
 
 export default router;

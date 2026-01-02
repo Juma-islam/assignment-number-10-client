@@ -14,7 +14,7 @@ const IssueCard = ({ issue, showAmount = false }) => {
         </figure>
         <div className="card-body">
           <h2 className="card-title">{title}</h2>
-          <p className="badge text-xs badge-xs badge-secondary rounded-full dark:text-white/80 "> {category}</p>
+          <p className="badge text-xs badge-xs bg-green-500 rounded-full dark:text-white/80 "> {category}</p>
           {!showAmount && (
             <p className="text-gray-700 dark:text-white/70 text-sm mb-2">{description?.slice(0, 80)}...</p>
           )}

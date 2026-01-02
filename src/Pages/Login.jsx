@@ -12,7 +12,6 @@ const Login = () => {
   const [error, setError] = useState("");
   const [show, setShow] = useState();
   const [email, setEmail] = useState();
-
   const handleLogin = (e) => {
     e.preventDefault();
     const email = e.target.email.value;
