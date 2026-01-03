@@ -1,16 +1,12 @@
 import React, { use, useEffect, useState } from "react";
 import { AuthContext } from "../../Provider/AuthContext";
 import { useRef } from "react";
-import { toast } from "react-toastify";
-import { useNavigate } from "react-router";
-import Swal from "sweetalert2";
 
 const MyIssues = () => {
   const { user } = use(AuthContext);
   const [issues, setIssues] = useState([]);
   const updateModalRef = useRef(null);
-  const [selectedIssue, setSelectedIssue] = useState(null);
-  const navigate = useNavigate();
+  const [selectedIssue, _] = useState(null);
 
   useEffect(() => {
     fetch(`https://clean-connect-project.vercel.app/my-issues/${user.email}`)
@@ -20,77 +16,7 @@ const MyIssues = () => {
       });
   }, [user.email]);
 
-  // update modal
-  const handleUpdateClick = (issue) => {
-    setSelectedIssue(issue);
-    updateModalRef.current.showModal();
-  };
-
-  // submit update
-  const handleUpdateSubmit = (e) => {
-    const updatedData = {
-      title: e.target.title.value,
-      category: e.target.category.value,
-      amount: Number(e.target.amount.value),
-      description: e.target.description.value,
-      status: e.target.status.value,
-    };
-
-    fetch(`https://clean-connect-project.vercel.app/issues/${selectedIssue._id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(updatedData),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.success) {
-          toast.success("Issue Updated!");
-          updateModalRef.current.close();
-          setIssues((prev) => prev.map((i) => (i._id === selectedIssue._id ? { ...i, ...updatedData } : i)));
-        }
-      });
-  };
-
-  const handleDelete = (id) => {
-    Swal.fire({
-      title: "Are you sure?",
-      text: "You won't be able to revert this!",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        fetch(`https://clean-connect-project.vercel.app/issues/${id}`, {
-          method: "DELETE",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        })
-          .then((res) => res.json())
-          .then((data) => {
-            if (data.success) {
-              setIssues((prev) => prev.filter((issue) => issue._id !== id));
-              Swal.fire("Deleted!", "Your issue has been deleted.", "success");
-            }
-            // console.log(data)
-            navigate("/all-issues");
-
-            Swal.fire({
-              title: "Deleted!",
-              text: "Your file has been deleted.",
-              icon: "success",
-            });
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-      }
-    });
-  };
+  
   return (
     <div className="p-6 max-w-6xl mx-auto">
       <title>My Issues Page</title>
@@ -109,7 +35,7 @@ const MyIssues = () => {
               <th>Category</th>
               <th>Amount</th>
               <th>Status</th>
-              <th>Actions</th>
+             
             </tr>
           </thead>
           <tbody>
@@ -119,14 +45,6 @@ const MyIssues = () => {
                 <td>{issue.category}</td>
                 <td>{issue.amount}</td>
                 <td>{issue.status}</td>
-                <td className="flex gap-2">
-                  <button className="btn btn-sm btn-outline btn-info" onClick={() => handleUpdateClick(issue)}>
-                    Update
-                  </button>
-                  <button className="btn btn-sm btn-outline btn-error" onClick={() => handleDelete(issue._id)}>
-                    Delete
-                  </button>
-                </td>
               </tr>
             ))}
             {issues.length === 0 && (
@@ -143,7 +61,7 @@ const MyIssues = () => {
         <div className="modal-box">
           <h3 className="font-bold text-lg mb-4">Update Issue</h3>
           {selectedIssue && (
-            <form onSubmit={handleUpdateSubmit} className="space-y-3">
+            <form className="space-y-3">
               <input
                 type="text"
                 name="title"
