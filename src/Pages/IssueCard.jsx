@@ -1,44 +1,65 @@
 import React from "react";
 import { LuBadgeDollarSign } from "react-icons/lu";
-import { Link } from "react-router";
 import { MdLocationPin } from "react-icons/md";
-
+import { Link } from "react-router";
 
 const IssueCard = ({ issue, showAmount = false }) => {
-  const { image, title, category, location, amount, description } = issue;
+  const { _id, image, title, category, location, amount, description } = issue;
+
   return (
-    <div className="mt-5 w-11/12 mx-auto">
-      <div className="card bg-base-100 w-[100%] shadow-sm hover:scale-105 transition-transform overflow-hidden">
-        <figure className="rounded-md m-4 overflow-hidden">
-          <img className=" h-52 md:h-76  w-full object-cover" src={image} alt="title" />
+    <div className="group">
+      <div className="card bg-white dark:bg-gray-800 shadow-lg hover:shadow-2xl rounded-2xl overflow-hidden transition-all duration-500 hover:scale-105 border border-gray-200 dark:border-gray-700">
+        {/* Image */}
+        <figure className="overflow-hidden">
+          <img
+            src={image}
+            alt={title}
+            className="w-full h-56 object-cover group-hover:scale-110 transition-transform duration-700"
+          />
         </figure>
-        <div className="card-body">
-          <h2 className="card-title">{title}</h2>
-          <p className="badge text-xs badge-xs bg-green-500 rounded-full dark:text-white/80 "> {category}</p>
-          {!showAmount && (
-            <p className="text-gray-700 dark:text-white/70 text-sm mb-2">{description?.slice(0, 80)}...</p>
-          )}
-          <p className="flex gap-2 items-center dark:text-white/80 text-gray-700 font-semibold ">
-            <span className=" text-blue-500 text-xl">
-              <MdLocationPin />
+
+        {/* Body */}
+        <div className="card-body p-6">
+          {/* Title */}
+          <h2 className="card-title text-xl font-bold text-gray-800 dark:text-white line-clamp-2">
+            {title}
+          </h2>
+
+          {/* Category Badge */}
+          <div className="mt-2">
+            <span className="badge badge-lg font-medium py-3 px-5 bg-gradient-to-r from-emerald-500 to-teal-600 text-white border-none">
+              {category}
             </span>
-            {location}
-          </p>
+          </div>
+
+          {/* Location */}
+          <div className="flex items-center gap-2 mt-4 text-gray-700 dark:text-gray-300 font-medium">
+            <MdLocationPin className="text-xl text-blue-500" />
+            <span className="truncate">{location}</span>
+          </div>
+
+          {/* Amount */}
           {showAmount && (
-            <p className="flex gap-2 items-center dark:text-white/80 text-gray-700 font-semibold">
-              <span className="text-xl text-green-500">
-                <LuBadgeDollarSign />
-              </span>{" "}
-              {amount}
-            </p>
+            <div className="flex items-center gap-2 mt-3 text-gray-800 dark:text-gray-200 font-bold text-lg">
+              <LuBadgeDollarSign className="text-2xl text-green-500" />
+              <span>৳{amount?.toLocaleString()}</span>
+            </div>
           )}
 
-          <Link
-            to={`/issues/${issue._id}`}
-            className="btn w-full text-white font-semibold bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 transition-all duration-300 border-none"
-          >
-            See Details
-          </Link>
+          {/* Description */}
+          <p className="text-gray-600 dark:text-gray-400 text-sm mt-4 line-clamp-3">
+            {description}
+          </p>
+
+          {/* Button */}
+          <div className="card-actions mt-6">
+            <Link
+              to={`/issues/${_id}`}
+              className="btn btn-block bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white font-bold text-lg shadow-lg border-none"
+            >
+              View Details
+            </Link>
+          </div>
         </div>
       </div>
     </div>

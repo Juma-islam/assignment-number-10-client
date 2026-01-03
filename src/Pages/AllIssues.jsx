@@ -1,64 +1,182 @@
+
+import React, { useEffect, useState } from "react";
 import IssueCard from "./IssueCard";
-import { useEffect, useState } from "react";
 
 const AllIssues = () => {
   const [issues, setIssues] = useState([]);
+  const [filteredIssues, setFilteredIssues] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  // Filters & Search
+  const [searchTerm, setSearchTerm] = useState("");
   const [category, setCategory] = useState("");
-  const [status, setStatus] = useState("");
+  const [sortBy, setSortBy] = useState("newest"); 
+
+  // Pagination
+  const [currentPage, setCurrentPage] = useState(1);
+  const issuesPerPage = 6;
 
   useEffect(() => {
-    let url = "https://clean-connect-project.vercel.app/issues?";
-    if (category) url += `category=${category}&`;
-    if (status) url += `status=${status}&`;
+    fetch("https://clean-connect-project.vercel.app/issues")
+      .then(res => res.json())
+      .then(data => {
+        const list = Array.isArray(data) ? data : data.result || [];
+        setIssues(list);
+        setFilteredIssues(list);
+        setLoading(false);
+      })
+      .catch(() => setLoading(false));
+  }, []);
 
-    fetch(url)
-      .then((res) => res.json())
-      .then((data) => setIssues(data));
-  }, [category, status]);
+  // Apply filters, search, sort
+  useEffect(() => {
+    let filtered = [...issues];
+
+    // Search
+    if (searchTerm) {
+      filtered = filtered.filter(
+        issue =>
+          issue.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          issue.location.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+    }
+
+    // Category filter
+    if (category) {
+      filtered = filtered.filter(issue => issue.category === category);
+    }
+
+    // Sorting
+    filtered.sort((a, b) => {
+      if (sortBy === "newest") return new Date(b.date) - new Date(a.date);
+      if (sortBy === "oldest") return new Date(a.date) - new Date(b.date);
+      if (sortBy === "amount-high") return b.amount - a.amount;
+      if (sortBy === "amount-low") return a.amount - b.amount;
+      return 0;
+    });
+
+    setFilteredIssues(filtered);
+    setCurrentPage(1); 
+  }, [searchTerm, category, sortBy, issues]);
+
+  // Pagination logic
+  const totalPages = Math.ceil(filteredIssues.length / issuesPerPage);
+  const startIndex = (currentPage - 1) * issuesPerPage;
+  const currentIssues = filteredIssues.slice(startIndex, startIndex + issuesPerPage);
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
   return (
-    <div className="w-11/12 mx-auto my-3">
-      <title>All Issues</title>
-      <h2 className="text-3xl text-center my-5 font-semibold">
-        All Reported{" "}
-        <span className="bg-gradient-to-r from-green-500 via-emerald-500 to-lime-400 bg-clip-text text-transparent">
-          Issues
-        </span>
-      </h2>
-      {/* filter section  */}
-      <div className="flex flex-col md:flex-row justify-center items-center gap-4 mb-6">
-        {/* category  */}
-        <select
-          className="select select-bordered w-full md:w-52"
-          value={category}
-          onChange={(e) => setCategory(e.target.value)}
-        >
-          <option value="">All Categories</option>
-          <option value="Garbage">Garbage</option>
-          <option value="Road Damage">Road Damage</option>
-          <option value="Community">Community</option>
-        </select>
-        {/* status  */}
-        <select
-          className="select select-bordered w-full md:w-52"
-          value={status}
-          onChange={(e) => setStatus(e.target.value)}
-        >
-          <option value="">All Status</option>
-          <option value="Pending">Pending</option>
-          <option value="In Progress">In Progress</option>
-          <option value="Resolved">Resolved</option>
-        </select>
-      </div>
-      <p className="text-center text-gray-700 dark:text-white/80 text-sm md:text-base max-w-3xl mx-auto mb-5">
-        Browse all reported issues related to garbage, road damage, and community cleanliness. Stay informed and join
-        hands in making our surroundings cleaner, safer, and more sustainable.
-      </p>
-      <div className="grid md:grid-cols-3 bg-green-100 gap-6">
-        {issues.length > 0 ? (
-          issues.map((issue) => <IssueCard key={issue._id} issue={issue} showAmount={true} />)
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-teal-50 dark:from-gray-900 dark:to-gray-800 py-12 px-4">
+      <div className="max-w-7xl mx-auto">
+        <h1 className="text-5xl font-extrabold text-center mb-4 bg-gradient-to-r from-emerald-600 to-teal-500 bg-clip-text text-transparent">
+          All Reported Issues
+        </h1>
+        <p className="text-center text-gray-600 dark:text-gray-400 text-lg mb-10 max-w-3xl mx-auto">
+          Explore community-reported issues. Use filters, search, and sort to find what matters to you.
+        </p>
+
+        {/* Search + Filters + Sort */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-10">
+          {/* Search */}
+          <input
+            type="text"
+            placeholder="Search by title or location..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="input input-bordered w-full focus:ring-2 focus:ring-emerald-500"
+          />
+
+          {/* Category */}
+          <select
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
+            className="select select-bordered w-full focus:ring-2 focus:ring-emerald-500"
+          >
+            <option value="">All Categories</option>
+            <option value="Garbage">Garbage</option>
+            <option value="Road Damage">Road Damage</option>
+            <option value="Community">Community</option>
+          </select>
+
+          {/* Sort */}
+          <select
+            value={sortBy}
+            onChange={(e) => setSortBy(e.target.value)}
+            className="select select-bordered w-full focus:ring-2 focus:ring-emerald-500"
+          >
+            <option value="newest">Newest First</option>
+            <option value="oldest">Oldest First</option>
+            <option value="amount-high">Highest Amount</option>
+            <option value="amount-low">Lowest Amount</option>
+          </select>
+        </div>
+
+        {/* Result Count */}
+        <p className="text-center text-gray-700 dark:text-gray-300 mb-6 font-medium">
+          Showing {currentIssues.length} of {filteredIssues.length} issues
+        </p>
+
+        {/* Loading Skeleton */}
+        {loading ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[...Array(6)].map((_, i) => (
+              <div key={i} className="card bg-white dark:bg-gray-800 shadow-xl rounded-2xl animate-pulse">
+                <div className="h-56 bg-gray-300 dark:bg-gray-700 rounded-t-2xl"></div>
+                <div className="card-body p-6">
+                  <div className="h-6 bg-gray-300 dark:bg-gray-700 rounded w-3/4 mb-3"></div>
+                  <div className="h-4 bg-gray-300 dark:bg-gray-700 rounded w-1/2"></div>
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : currentIssues.length === 0 ? (
+          <div className="text-center py-20">
+            <p className="text-2xl text-gray-500 dark:text-gray-400">No issues found matching your filters.</p>
+          </div>
         ) : (
-          <p className="text-center col-span-3 text-gray-600">No issues found</p>
+          <>
+            {/* Issues Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+              {currentIssues.map(issue => (
+                <IssueCard key={issue._id} issue={issue} showAmount={true} />
+              ))}
+            </div>
+
+            {/* Pagination */}
+            {totalPages > 1 && (
+              <div className="flex justify-center gap-3 mt-12">
+                <button
+                  onClick={() => handlePageChange(currentPage - 1)}
+                  disabled={currentPage === 1}
+                  className="btn btn-outline btn-emerald disabled:opacity-50"
+                >
+                  Previous
+                </button>
+
+                {[...Array(totalPages)].map((_, i) => (
+                  <button
+                    key={i}
+                    onClick={() => handlePageChange(i + 1)}
+                    className={`btn ${currentPage === i + 1 ? "btn-active bg-emerald-600 text-white" : "btn-outline"}`}
+                  >
+                    {i + 1}
+                  </button>
+                ))}
+
+                <button
+                  onClick={() => handlePageChange(currentPage + 1)}
+                  disabled={currentPage === totalPages}
+                  className="btn btn-outline btn-emerald disabled:opacity-50"
+                >
+                  Next
+                </button>
+              </div>
+            )}
+          </>
         )}
       </div>
     </div>

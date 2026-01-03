@@ -1,5 +1,105 @@
+// import React, { useEffect, useState } from "react";
+// import { AuthContext } from "./AuthContext";
+// import {
+//   createUserWithEmailAndPassword,
+//   getAuth,
+//   GoogleAuthProvider,
+//   onAuthStateChanged,
+//   sendPasswordResetEmail,
+//   signInWithEmailAndPassword,
+//   signInWithPopup,
+//   signOut,
+//   updateProfile,
+// } from "firebase/auth";
+// import app from "../firebase/firebase.config";
+
+// const googleProvider = new GoogleAuthProvider();
+// const auth = getAuth(app);
+// const AuthProvider = ({ children }) => {
+//   const [user, setUser] = useState(null);
+//   const [loading, setLoading] = useState(true);
+//   const [userRole, setUserRole] = useState(null);
+
+//   const createUser = (email, password) => {
+//     setLoading(true);
+//     return createUserWithEmailAndPassword(auth, email, password);
+//   };
+
+//   const signIn = (email, password) => {
+//     setLoading(true);
+//     return signInWithEmailAndPassword(auth, email, password);
+//   };
+//   const signInWithGoogleFunc = () => {
+//     return signInWithPopup(auth, googleProvider);
+//   };
+//   const updateUser = (updateData) => {
+//     return updateProfile(auth.currentUser, updateData);
+//   };
+
+//   const sendPasswordResetEmailFunc = (email) => {
+//     return sendPasswordResetEmail(auth, email);
+//   };
+
+//   useEffect(() => {
+//     const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
+//       setUser(currentUser);
+//       setLoading(false);
+//     });
+//     return () => {
+//       unSubscribe();
+//     };
+//   }, []);
+
+//   const logOut = () => {
+//     return signOut(auth);
+//   };
+//   // admin
+//   useEffect(() => {
+//     const unSubscribe = onAuthStateChanged(auth, async (currentUser) => {
+//       setUser(currentUser);
+
+//       if (currentUser?.email) {
+//         try {
+//           const res = await fetch(
+//             `https://clean-connect-project.vercel.app/user-role/${currentUser.email}`
+//           );
+//           const data = await res.json();
+//           setUserRole(data.role); // "user" | "admin"
+//         } catch (err) {
+//           console.error(err);
+//           setUserRole("user");
+//         }
+//       } else {
+//         setUserRole(null);
+//       }
+
+//       setLoading(false);
+//     });
+
+//     return () => unSubscribe();
+//   }, []);
+
+//   const authdata = {
+//     user,
+//     setUser,
+//     createUser,
+//     loading,
+//     setLoading,
+//     logOut,
+//     signIn,
+//     updateUser,
+//     signInWithGoogleFunc,
+//     sendPasswordResetEmailFunc,
+//     userRole,
+//     isAdmin: userRole === "admin",
+//   };
+//   return <AuthContext.Provider value={authdata}>{children}</AuthContext.Provider>;
+// };
+
+// export default AuthProvider;
+
+
 import React, { useEffect, useState } from "react";
-import { AuthContext } from "./AuthContext";
 import {
   createUserWithEmailAndPassword,
   getAuth,
@@ -12,13 +112,16 @@ import {
   updateProfile,
 } from "firebase/auth";
 import app from "../firebase/firebase.config";
+import { AuthContext } from "./AuthContext";
+
 
 const googleProvider = new GoogleAuthProvider();
 const auth = getAuth(app);
+
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);
   const [userRole, setUserRole] = useState(null);
+  const [loading, setLoading] = useState(true); 
 
   const createUser = (email, password) => {
     setLoading(true);
@@ -29,9 +132,12 @@ const AuthProvider = ({ children }) => {
     setLoading(true);
     return signInWithEmailAndPassword(auth, email, password);
   };
+
   const signInWithGoogleFunc = () => {
+    setLoading(true);
     return signInWithPopup(auth, googleProvider);
   };
+
   const updateUser = (updateData) => {
     return updateProfile(auth.currentUser, updateData);
   };
@@ -40,22 +146,13 @@ const AuthProvider = ({ children }) => {
     return sendPasswordResetEmail(auth, email);
   };
 
-  useEffect(() => {
-    const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
-      setLoading(false);
-    });
-    return () => {
-      unSubscribe();
-    };
-  }, []);
-
   const logOut = () => {
+    setLoading(true);
     return signOut(auth);
   };
-  // admin
+
   useEffect(() => {
-    const unSubscribe = onAuthStateChanged(auth, async (currentUser) => {
+    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
       setUser(currentUser);
 
       if (currentUser?.email) {
@@ -64,9 +161,10 @@ const AuthProvider = ({ children }) => {
             `https://clean-connect-project.vercel.app/user-role/${currentUser.email}`
           );
           const data = await res.json();
-          setUserRole(data.role); // "user" | "admin"
+          const role = data.role || "user";
+          setUserRole(role);
         } catch (err) {
-          console.error(err);
+          console.error("Failed to fetch role:", err);
           setUserRole("user");
         }
       } else {
@@ -76,24 +174,27 @@ const AuthProvider = ({ children }) => {
       setLoading(false);
     });
 
-    return () => unSubscribe();
+    return () => unsubscribe();
   }, []);
 
-  const authdata = {
+  const authInfo = {
     user,
-    setUser,
-    createUser,
     loading,
-    setLoading,
-    logOut,
-    signIn,
-    updateUser,
-    signInWithGoogleFunc,
-    sendPasswordResetEmailFunc,
     userRole,
     isAdmin: userRole === "admin",
+    createUser,
+    signIn,
+    signInWithGoogleFunc,
+    updateUser,
+    sendPasswordResetEmailFunc,
+    logOut,
   };
-  return <AuthContext.Provider value={authdata}>{children}</AuthContext.Provider>;
+
+  return (
+    <AuthContext.Provider value={authInfo}>
+      {children}
+    </AuthContext.Provider>
+  );
 };
 
 export default AuthProvider;
