@@ -1,140 +1,141 @@
+import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router";
 import { AuthContext } from "../Provider/AuthContext";
-import { use, useState } from "react";
+import { FaEye, FaEyeSlash, FaGoogle } from "react-icons/fa";
 import { toast } from "react-toastify";
-import { FaEye } from "react-icons/fa";
-import { IoEyeOff } from "react-icons/io5";
 
 const Register = () => {
-  const { createUser, setUser, updateUser, signInWithGoogleFunc } = use(AuthContext);
-  const [nameError, setNameError] = useState("");
-  const [show, setShow] = useState(false);
+  const { createUser, updateUser, signInWithGoogleFunc } = useContext(AuthContext);
+  const [showPassword, setShowPassword] = useState(false);
+  const [errors, setErrors] = useState({});
   const navigate = useNavigate();
-  const handleRegister = (e) => {
-    e.preventDefault();
-    const name = e.target.name.value;
-    if (name.length < 5) {
-      setNameError("Name should be 5 character more");
-      return;
-    } else {
-      setNameError("");
-    }
-    const email = e.target.email.value;
-    const photo = e.target.photo.value;
-    const password = e.target.password.value;
-    const regexp = /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
-    if (!regexp.test(password)) {
-      toast.error(
-        "Password must be at least 6 characters long and include at least one uppercase letter, one lowercase letter."
-      );
-      return;
-    }
-    createUser(email, password)
-      .then((result) => {
-        const user = result.user;
-        updateUser({ displayName: name, photoURL: photo })
-          .then(() => {
-            setUser({ ...user, displayName: name, photoURL: photo });
-            navigate("/");
-          })
-          .catch((error) => {
-            console.log(error);
-            setUser(user);
-          });
-      })
-      .catch((error) => {
-        const errorMessage = error.message;
-        toast.error(errorMessage);
-      });
+
+  const validateForm = (name, email, photo, password) => {
+    const newErrors = {};
+    if (name.length < 3) newErrors.name = "Name must be at least 3 characters";
+    if (!photo) newErrors.photo = "Photo URL is required";
+    if (password.length < 6) newErrors.password = "Password must be 6+ characters";
+    if (!/(?=.*[a-z])(?=.*[A-Z])/.test(password))
+      newErrors.password = "Password needs uppercase & lowercase";
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
   };
-  const handleGoogleSignIn = () => {
-    signInWithGoogleFunc()
-      .then((res) => {
-        setUser(res.user);
-        toast.success("Signin Successful!!");
-      })
-      .catch((error) => {
-        toast.error(error.message);
+
+  const saveUserToDB = async (user) => {
+    const userInfo = {
+      email: user.email,
+      name: user.displayName,
+      photoURL: user.photoURL,
+    };
+
+    try {
+      const res = await fetch("https://clean-connect-project.vercel.app/save-user", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(userInfo),
       });
+      if (!res.ok) throw new Error("Failed to save user");
+    } catch (err) {
+      console.error(err);
+      toast.warning("User registered but not saved to database");
+    }
+  };
+
+  const handleRegister = async (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const name = form.name.value.trim();
+    const email = form.email.value;
+    const photo = form.photo.value;
+    const password = form.password.value;
+
+    if (!validateForm(name, email, photo, password)) return;
+
+    try {
+      const result = await createUser(email, password);
+      await updateUser({ displayName: name, photoURL: photo });
+      toast.success("Registration Successful!");
+
+      // Save to MongoDB
+      await saveUserToDB(result.user);
+
+      navigate("/");
+    } catch (err) {
+      toast.error("Registration failed: " + err.message);
+    }
+  };
+
+  const handleGoogle = async () => {
+    try {
+      const result = await signInWithGoogleFunc();
+      toast.success("Google Signup Successful!");
+
+      // Save to MongoDB
+      await saveUserToDB(result.user);
+
+      navigate("/");
+    } catch (err) {
+      toast.error(err.message);
+    }
   };
 
   return (
-    <div className="flex justify-center min-h-screen items-center">
-      <title>Register page</title>
-      <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl py-5">
-        <h1 className="text-2xl font-semibold text-center"> SignUp</h1>
-        <form onSubmit={handleRegister} className="card-body">
-          <fieldset className="fieldset">
-            {/* name  */}
-            <label className="label">Name</label>
-            <input
-              type="text"
-              name="name"
-              className="input input-bordered w-full bg-white/20  placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-pink-400"
-              placeholder="Name"
-              required
-            />
-            {nameError && <p className="text-sm text-error">{nameError}</p>}
-            {/* photo Url  */}
-            <label className="label">Photo URL</label>
-            <input
-              type="text"
-              name="photo"
-              className="input input-bordered w-full bg-white/20  placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-pink-400"
-              placeholder="Photo URL"
-              required
-            />
-            {/* email  */}
-            <label className="label">Email</label>
-            <input
-              type="email"
-              name="email"
-              className="input input-bordered w-full bg-white/20  placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-pink-400"
-              placeholder="Email"
-              required
-            />
-            {/* password  */}
+    <div className="min-h-screen bg-gradient-to-br from-teal-50 to-emerald-100 dark:from-gray-900 dark:to-gray-800 flex items-center justify-center p-4">
+      <div className="card w-full max-w-md bg-white dark:bg-gray-800 shadow-2xl rounded-2xl overflow-hidden">
+        <div className="bg-gradient-to-r from-teal-600 to-emerald-500 py-8 text-center">
+          <h1 className="text-3xl font-bold text-white">Join CommunityFix</h1>
+          <p className="text-teal-100 mt-2">Create your account today</p>
+        </div>
+
+        <div className="p-8">
+          <form onSubmit={handleRegister} className="space-y-5">
+            <div>
+              <label className="label font-medium">Full Name</label>
+              <input type="text" name="name" className="input input-bordered w-full" placeholder="John Doe" required />
+              {errors.name && <p className="text-red-500 text-xs mt-1">{errors.name}</p>}
+            </div>
+
+            <div>
+              <label className="label font-medium">Photo URL</label>
+              <input type="url" name="photo" className="input input-bordered w-full" placeholder="https://..." required />
+              {errors.photo && <p className="text-red-500 text-xs mt-1">{errors.photo}</p>}
+            </div>
+
+            <div>
+              <label className="label font-medium">Email</label>
+              <input type="email" name="email" className="input input-bordered w-full" placeholder="you@example.com" required />
+            </div>
+
             <div className="relative">
-              <label className="block text-sm font-medium mb-1">Password</label>
+              <label className="label font-medium">Password</label>
               <input
-                type={show ? "text" : "password"}
+                type={showPassword ? "text" : "password"}
                 name="password"
+                className="input input-bordered w-full pr-12"
                 placeholder="••••••••"
-                className="input input-bordered w-full bg-white/20 placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-pink-400"
+                required
               />
-              <span onClick={() => setShow(!show)} className="absolute top-9 right-3 cursor-pointer z-50">
-                {show ? <FaEye /> : <IoEyeOff />}
-              </span>
+              <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-3 top-10">
+                {showPassword ? <FaEyeSlash /> : <FaEye />}
+              </button>
+              {errors.password && <p className="text-red-500 text-xs mt-1">{errors.password}</p>}
             </div>
 
-            <button type="submit" className="btn btn-neutral mt-4">
-              Sign In
+            <button type="submit" className="btn btn-block bg-teal-600 hover:bg-teal-700 text-white">
+              Create Account
             </button>
+          </form>
 
-            {/* Divider */}
-            <div className="flex items-center justify-center gap-2 my-2">
-              <div className="h-px w-16 bg-green-500"></div>
-              <span className="text-sm text-green-500">or</span>
-              <div className="h-px w-16 bg-green-500"></div>
-            </div>
+          <div className="divider my-6">OR</div>
 
-            {/* Google Signin */}
-            <button
-              onClick={handleGoogleSignIn}
-              type="button"
-              className="flex items-center justify-center gap-3 btn btn-outline text-gray-800 px-5 py-2 rounded-lg w-full font-semibold hover:bg-gray-100 transition-colors cursor-pointer"
-            >
-              <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="google" className="w-5 h-5" />
-              Continue with Google
-            </button>
-            <p className="text-center mt-2">
-              Already have an account ?{" "}
-              <Link to="/login" className="text-blue-500 hover:text-blue-800 underline">
-                Sign In
-              </Link>
-            </p>
-          </fieldset>
-        </form>
+          <button onClick={handleGoogle} className="btn btn-block btn-outline flex items-center justify-center gap-3">
+            <FaGoogle className="text-red-500" /> Sign up with Google
+          </button>
+
+          <p className="text-center mt-6 text-sm">
+            Already have an account? <Link to="/login" className="text-teal-600 font-semibold hover:underline">Login Here</Link>
+          </p>
+        </div>
       </div>
     </div>
   );

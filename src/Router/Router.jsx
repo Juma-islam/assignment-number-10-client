@@ -12,7 +12,6 @@ import AddIssues from "../Pages/AddIssues/AddIssues";
 import IssueDetails from "../Pages/issueDetails";
 import MyIssues from "../Pages/MyIssues/MyIssues";
 import MyContributions from "../Pages/MyContributions/MyContributions";
-// import MyProfile from "../Pages/MyProfile";
 import DashboardLayouts from "../Layouts/DashboardLayouts";
 import AboutUs from "../Pages/AboutUs/AboutUs";
 import Contact from "../Pages/Contact/Contact";
@@ -23,6 +22,9 @@ import FAQ from "../Pages/FooterPages/FAQ/FAQ";
 import HelpCenter from "../Pages/FooterPages/HelpCenter/HelpCenter";
 import DashboardHome from "../Pages/DashboardPages/DashboardHome";
 import MyProfile from "../Pages/MyProfile";
+import ManageIssues from "../Pages/DashboardPages/ManageIssues/ManageIssues";
+import ManageContributions from "../Pages/DashboardPages/ManageContributions/ManageContributions";
+import AdminRoute from "../routes/AdminRoute/AdminRoute";
 
 const router = createBrowserRouter([
   {
@@ -71,31 +73,7 @@ const router = createBrowserRouter([
         path: '/help',
         Component: HelpCenter
       },
-      // {
-      //   path: "/add-issues",
-      //   element: (
-      //     <PrivateRoute>
-      //       <AddIssues />
-      //     </PrivateRoute>
-      //   ),
-      // },
-      // {
-      //   path: "/my-issues",
-      //   element: (
-      //     <PrivateRoute>
-      //       <MyIssues />
-      //     </PrivateRoute>
-      //   ),
-      // },
-      // {
-      //   path: "/my-contributions",
-      //   element: (
-      //     <PrivateRoute>
-      //       <MyContributions />
-      //     </PrivateRoute>
-      //   ),
-      // },
-  
+     
       {
         path: "/login",
         Component: Login,
@@ -140,6 +118,14 @@ const router = createBrowserRouter([
         path: "my-profile",
         element: <MyProfile />
       },
+      {
+      path: "manage-issues",
+      element: <AdminRoute><ManageIssues /></AdminRoute>
+    },
+    {
+      path: "manage-contributions",
+      element: <AdminRoute><ManageContributions /></AdminRoute>
+    }
     ]
   }
 ]);

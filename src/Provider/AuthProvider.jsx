@@ -18,6 +18,7 @@ const auth = getAuth(app);
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [userRole, setUserRole] = useState(null);
 
   const createUser = (email, password) => {
     setLoading(true);
@@ -52,6 +53,31 @@ const AuthProvider = ({ children }) => {
   const logOut = () => {
     return signOut(auth);
   };
+  // admin
+  useEffect(() => {
+    const unSubscribe = onAuthStateChanged(auth, async (currentUser) => {
+      setUser(currentUser);
+
+      if (currentUser?.email) {
+        try {
+          const res = await fetch(
+            `https://clean-connect-project.vercel.app/user-role/${currentUser.email}`
+          );
+          const data = await res.json();
+          setUserRole(data.role); // "user" | "admin"
+        } catch (err) {
+          console.error(err);
+          setUserRole("user");
+        }
+      } else {
+        setUserRole(null);
+      }
+
+      setLoading(false);
+    });
+
+    return () => unSubscribe();
+  }, []);
 
   const authdata = {
     user,
@@ -64,6 +90,8 @@ const AuthProvider = ({ children }) => {
     updateUser,
     signInWithGoogleFunc,
     sendPasswordResetEmailFunc,
+    userRole,
+    isAdmin: userRole === "admin",
   };
   return <AuthContext.Provider value={authdata}>{children}</AuthContext.Provider>;
 };

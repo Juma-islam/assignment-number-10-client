@@ -1,124 +1,194 @@
-import React, { use, useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router";
 import { AuthContext } from "../Provider/AuthContext";
-import { FaEye } from "react-icons/fa";
-import { IoEyeOff } from "react-icons/io5";
+import { FaEye, FaEyeSlash, FaGoogle } from "react-icons/fa";
 import { toast } from "react-toastify";
 
 const Login = () => {
-  const { signIn, setUser, signInWithGoogleFunc, sendPasswordResetEmailFunc } = use(AuthContext);
+  const { signIn, signInWithGoogleFunc, sendPasswordResetEmailFunc } = useContext(AuthContext);
+  const [showPassword, setShowPassword] = useState(false);
+  const [email, setEmail] = useState("");
+  const [error, setError] = useState("");
   const location = useLocation();
   const navigate = useNavigate();
-  const [error, setError] = useState("");
-  const [show, setShow] = useState();
-  const [email, setEmail] = useState();
-  const handleLogin = (e) => {
+
+  // Save user to MongoDB after successful login
+  const saveUserToDB = async (user) => {
+    const userInfo = {
+      email: user.email,
+      name: user.displayName || "User",
+      photoURL: user.photoURL || "",
+    };
+
+    try {
+      await fetch("https://clean-connect-project.vercel.app/save-user", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(userInfo),
+      });
+    } catch (err) {
+      console.error("Failed to save user to DB:", err);
+       toast.warning("Logged in, but sync with database failed");
+    }
+  };
+
+  const handleLogin = async (e) => {
     e.preventDefault();
-    const email = e.target.email.value;
-    const password = e.target.password.value;
+    setError("");
+    const form = e.target;
+    const email = form.email.value.trim();
+    const password = form.password.value;
 
-    signIn(email, password)
-      .then((result) => {
-        const user = result.user;
-        console.log(user);
-        navigate(`${location.state ? location.state : "/"}`);
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        // const errorMessage = error.message;
-        // alert(errorCode, errorMessage)
-        setError(errorCode);
-      });
+    try {
+      const result = await signIn(email, password);
+      await saveUserToDB(result.user);
+      toast.success("Login Successful!");
+      navigate(location.state || "/");
+    } catch (err) {
+      console.error(err);
+      setError("Invalid email or password");
+      toast.error("Login failed! Please check your credentials.");
+    }
   };
 
-  const handleGoogleSignIn = () => {
-    signInWithGoogleFunc()
-      .then((res) => {
-        setUser(res.user);
-        toast.success("Logged in with Google");
-        navigate(`${location.state ? location.state : "/"}`);
-      })
-      .catch((error) => {
-        toast.error(error.message);
-      });
+  const handleGoogleLogin = async () => {
+    try {
+      const result = await signInWithGoogleFunc();
+      await saveUserToDB(result.user);
+      toast.success("Google Login Successful!");
+      navigate(location.state || "/");
+    } catch (err) {
+      console.log(err)
+      toast.error("Google Login Failed");
+    }
   };
+
+  // Demo Credentials Auto-fill
+  const demoCredentials = [
+    { label: "Demo User", email: "user@communityfix.com", pass: "User123" },
+    { label: "Demo Admin", email: "admin@communityfix.com", pass: "Admin123" },
+  ];
+
+  const autoFill = (email, pass) => {
+    const emailInput = document.querySelector("input[name='email']");
+    const passInput = document.querySelector("input[name='password']");
+
+    if (emailInput && passInput) {
+      emailInput.value = email;
+      passInput.value = pass;
+      setEmail(email);
+      toast.info(`Auto-filled: ${email} – Just click Login!`, { autoClose: 3000 });
+    }
+  };
+
+  const handleForgotPassword = () => {
+    if (!email) {
+      toast.error("Please enter your email first!");
+      return;
+    }
+    sendPasswordResetEmailFunc(email)
+      .then(() => toast.success("Password reset email sent! Check your inbox."))
+      .catch(() => toast.error("Failed to send reset email"));
+  };
+
   return (
-    <div className="flex justify-center min-h-screen items-center">
-      <title>Login page</title>
-      <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl py-5">
-        <h1 className="text-2xl font-semibold text-center">Please Login your account</h1>
-        <form onSubmit={handleLogin} className="card-body">
-          <fieldset className="fieldset">
-            {/* email  */}
-            <label className="label">Email</label>
-            <input
-              type="email"
-              onChange={(e) => setEmail(e.target.value)}
-              name="email"
-              className="input input-bordered w-full bg-white/20  placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-pink-400"
-              placeholder="Email"
-              required
-            />
-            {/* password  */}
-            <div className="relative">
-              <label className="block text-sm font-medium mb-1">Password</label>
-              <input
-                type={show ? "text" : "password"}
-                name="password"
-                placeholder="••••••••"
-                className="input input-bordered w-full bg-white/20  placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-pink-400"
-              />
-              <span onClick={() => setShow(!show)} className="absolute top-9 right-3 cursor-pointer z-50">
-                {show ? <FaEye /> : <IoEyeOff />}
-              </span>
-            </div>
+    <div className="min-h-screen bg-gradient-to-br from-emerald-50 to-teal-100 dark:from-gray-900 dark:to-gray-800 flex items-center justify-center p-4">
+      <div className="card w-full max-w-md bg-white dark:bg-gray-800 shadow-2xl rounded-2xl overflow-hidden">
+        {/* Header */}
+        <div className="bg-gradient-to-r from-emerald-500 to-teal-600 py-10 text-center">
+          <h1 className="text-4xl font-bold text-white">Welcome Back!</h1>
+          <p className="text-teal-100 mt-2 text-lg">Login to CommunityFix</p>
+        </div>
 
-            <div>
-              <a
-                onClick={() => {
-                  if (!email) {
-                    toast.error("please enter your email first");
-                    return;
-                  }
-                  sendPasswordResetEmailFunc(email)
-                    .then(() => toast.success("password reset email sent!"))
-                    .catch((error) => toast.error(error.message));
-                  return;
-                }}
-                className="link link-hover"
+        <div className="p-8">
+          {/* Demo Login Buttons */}
+          <div className="mb-8 grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {demoCredentials.map((cred) => (
+              <button
+                key={cred.email}
+                onClick={() => autoFill(cred.email, cred.pass)}
+                className="btn btn-outline border-emerald-500 text-emerald-700 dark:text-emerald-400 hover:bg-emerald-50 dark:hover:bg-emerald-900 transition"
               >
-                Forgot password? <span className="underline text-blue-600">Link</span>
-              </a>
-            </div>
-            {error && <p className="text-sm text-red-500">{error}</p>}
-            <button type="submit" className="btn btn-neutral mt-4">
-              Sign In
-            </button>
+                {cred.label}
+              </button>
+            ))}
+          </div>
 
-            {/* Divider */}
-            <div className="flex items-center justify-center gap-2 my-2">
-              <div className="h-px w-16 bg-green-500"></div>
-              <span className="text-sm text-green-500">or</span>
-              <div className="h-px w-16 bg-green-500"></div>
+          <form onSubmit={handleLogin} className="space-y-6">
+            {/* Email */}
+            <div>
+              <label className="label font-semibold text-gray-700 dark:text-gray-300">Email</label>
+              <input
+                type="email"
+                name="email"
+                onChange={(e) => setEmail(e.target.value)}
+                className="input input-bordered w-full focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+                placeholder="your@email.com"
+                required
+              />
             </div>
 
-            {/* Google Signin */}
+            {/* Password */}
+            <div className="relative">
+              <label className="label font-semibold text-gray-700 dark:text-gray-300">Password</label>
+              <input
+                type={showPassword ? "text" : "password"}
+                name="password"
+                className="input input-bordered w-full pr-12 focus:ring-2 focus:ring-emerald-500"
+                placeholder="••••••••"
+                required
+              />
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute right-3 top-10 text-xl text-gray-600 dark:text-gray-400"
+              >
+                {showPassword ? <FaEyeSlash /> : <FaEye />}
+              </button>
+            </div>
+
+            {/* Forgot Password */}
+            <div className="text-right">
+              <button
+                type="button"
+                onClick={handleForgotPassword}
+                className="link link-hover text-sm font-medium text-emerald-600 hover:text-emerald-800"
+              >
+                Forgot Password?
+              </button>
+            </div>
+
+            {/* Error Message */}
+            {error && <p className="text-red-500 text-center font-medium">{error}</p>}
+
+            {/* Submit Button */}
             <button
-              onClick={handleGoogleSignIn}
-              type="button"
-              className="flex items-center justify-center gap-3 btn btn-outline text-gray-800 px-5 py-2 rounded-lg w-full font-semibold hover:bg-gray-100 transition-colors cursor-pointer"
+              type="submit"
+              className="btn btn-block bg-emerald-600 hover:bg-emerald-700 text-white text-lg font-semibold"
             >
-              <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="google" className="w-5 h-5" />
-              Continue with Google
+              Login
             </button>
-            <p className="text-center mt-2">
-              Don't have an account ?{" "}
-              <Link to="/register" className="text-blue-500 hover:text-blue-800 underline">
-                Sign Up
-              </Link>
-            </p>
-          </fieldset>
-        </form>
+          </form>
+
+          <div className="divider my-8 text-gray-500">OR</div>
+
+          {/* Google Login */}
+          <button
+            onClick={handleGoogleLogin}
+            className="btn btn-block btn-outline border-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700 flex items-center justify-center gap-4 text-lg"
+          >
+            <FaGoogle className="text-2xl text-red-500" />
+            Continue with Google
+          </button>
+
+          {/* Register Link */}
+          <p className="text-center mt-8 text-gray-600 dark:text-gray-400">
+            New to CommunityFix?{" "}
+            <Link to="/register" className="font-bold text-emerald-600 hover:underline">
+              Create an Account
+            </Link>
+          </p>
+        </div>
       </div>
     </div>
   );
