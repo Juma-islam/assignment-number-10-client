@@ -1,54 +1,137 @@
-import React from 'react';
+import React from "react";
 
 const AboutUs = () => {
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+    <div className="bg-gray-50 text-gray-800">
       {/* Hero Section */}
-      <section className="relative h-96 flex items-center justify-center bg-cover bg-center" style={{backgroundImage: "url('https://www.stathakis.com/hs-fs/hubfs/Professional-cleaning-service-team-cleans-living-room-in-modern-apartment.png?width=833&height=558&name=Professional-cleaning-service-team-cleans-living-room-in-modern-apartment.png')"}}>
-        <div className="bg-black bg-opacity-50 absolute inset-0"></div>
-        <div className="relative text-center text-white px-6">
-          <h1 className="text-5xl font-bold mb-4">About CleanConnect</h1>
-          <p className="text-xl">Connecting You to Spotless Homes – Effortlessly</p>
+      <section
+        className="relative h-[420px] flex items-center justify-center bg-cover bg-center"
+        style={{
+          backgroundImage:
+            "url('https://media.istockphoto.com/id/1354898581/photo/volunteers-collecting-garbage-in-park.jpg')",
+        }}
+      >
+        <div className="absolute inset-0 bg-green-900/70"></div>
+        <div className="relative text-center text-white px-6 max-w-3xl">
+          <h1 className="text-4xl md:text-5xl font-bold mb-4">
+            About CleanConnect
+          </h1>
+          <p className="text-lg md:text-xl opacity-90">
+            Connecting communities to create a cleaner, greener, and healthier
+            environment together.
+          </p>
         </div>
       </section>
 
       {/* Our Story */}
-      <section className="py-16 px-6 max-w-6xl mx-auto">
-        <h2 className="text-4xl font-bold text-center mb-10 text-blue-600 dark:text-blue-400">Our Story</h2>
-        <p className="text-lg text-gray-700 dark:text-gray-300 text-center mb-12">
-          CleanConnect started in 2024 with a simple mission: to connect busy homeowners with reliable, professional cleaners. We believe everyone deserves a clean, healthy home without the hassle.
+      <section className="max-w-6xl mx-auto px-6 py-16">
+        <h2 className="text-3xl font-bold text-center text-green-600 mb-6">
+          Our Story
+        </h2>
+        <p className="text-center text-gray-600 max-w-3xl mx-auto leading-relaxed">
+          CleanConnect was created to bridge the gap between community problems
+          and people who care. From small neighborhood clean-ups to larger
+          environmental initiatives, our platform empowers citizens to report
+          issues, contribute to solutions, and build a cleaner future together.
         </p>
+      </section>
 
-        {/* Images */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
-          <img src="https://media.istockphoto.com/id/1943841348/photo/professional-housekeeper-services-company-team-working-at-customer-house.jpg?s=612x612&w=0&k=20&c=DHwJqcQWwKUnJ5ODcQKeefk6m_kjpWGb0Od9khs5iK0=" alt="Cleaning Team" className="rounded-lg shadow-lg" />
-          <img src="https://jccarpetclean.com/wp-content/uploads/2025/03/Untitled-design-24.png" alt="Happy Family" className="rounded-lg shadow-lg" />
-          <img src="https://media.greenmatters.com/brand-img/Z17N3fm/0x0/All4Products-1521730005878.jpg" alt="Eco Products" className="rounded-lg shadow-lg" />
+      {/* Mission, Vision, Values */}
+      <section className="bg-white py-16">
+        <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="p-6 rounded-xl shadow hover:shadow-lg transition">
+            <h3 className="text-xl font-semibold text-green-600 mb-3">
+              Our Mission
+            </h3>
+            <p className="text-gray-600">
+              To simplify reporting environmental issues and enable collective
+              action through transparency and community support.
+            </p>
+          </div>
+
+          <div className="p-6 rounded-xl shadow hover:shadow-lg transition">
+            <h3 className="text-xl font-semibold text-green-600 mb-3">
+              Our Vision
+            </h3>
+            <p className="text-gray-600">
+              A world where every community actively participates in maintaining
+              cleanliness and environmental responsibility.
+            </p>
+          </div>
+
+          <div className="p-6 rounded-xl shadow hover:shadow-lg transition">
+            <h3 className="text-xl font-semibold text-green-600 mb-3">
+              Our Values
+            </h3>
+            <p className="text-gray-600">
+              Sustainability, accountability, transparency, and collaboration
+              drive everything we do.
+            </p>
+          </div>
         </div>
+      </section>
 
-        {/* Why Choose Us */}
-        <h2 className="text-4xl font-bold text-center mb-10 text-blue-600 dark:text-blue-400">Why Choose Us</h2>
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
-          <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow">
-            <h3 className="text-xl font-semibold mb-2">Verified Cleaners</h3>
-            <p>All cleaners are background-checked</p>
+      {/* Why Choose CleanConnect */}
+      <section className="max-w-6xl mx-auto px-6 py-16">
+        <h2 className="text-3xl font-bold text-center text-green-600 mb-10">
+          Why Choose CleanConnect
+        </h2>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+          <div className="bg-white p-6 rounded-xl shadow text-center">
+            <h4 className="font-semibold text-lg mb-2">
+              Community Driven
+            </h4>
+            <p className="text-gray-600 text-sm">
+              Built for people who care about their surroundings.
+            </p>
           </div>
-          <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow">
-            <h3 className="text-xl font-semibold mb-2">Eco-Friendly</h3>
-            <p>We promote natural cleaning products</p>
+
+          <div className="bg-white p-6 rounded-xl shadow text-center">
+            <h4 className="font-semibold text-lg mb-2">
+              Transparent Process
+            </h4>
+            <p className="text-gray-600 text-sm">
+              Track issues, contributions, and progress in real-time.
+            </p>
           </div>
-          <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow">
-            <h3 className="text-xl font-semibold mb-2">Satisfaction Guarantee</h3>
-            <p>100% happy or we reclean for free</p>
+
+          <div className="bg-white p-6 rounded-xl shadow text-center">
+            <h4 className="font-semibold text-lg mb-2">
+              Secure Contributions
+            </h4>
+            <p className="text-gray-600 text-sm">
+              Safe and reliable clean-up funding system.
+            </p>
           </div>
-          <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow">
-            <h3 className="text-xl font-semibold mb-2">Easy Booking</h3>
-            <p>Book in seconds online</p>
+
+          <div className="bg-white p-6 rounded-xl shadow text-center">
+            <h4 className="font-semibold text-lg mb-2">
+              Impact Focused
+            </h4>
+            <p className="text-gray-600 text-sm">
+              Every action helps improve the environment.
+            </p>
           </div>
         </div>
+      </section>
 
-        <div className="text-center mt-12">
-          <a href="/" className="bg-blue-600 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-blue-700">Book Your Cleaning Today</a>
+      {/* CTA Section */}
+      <section className="bg-green-600 py-14">
+        <div className="text-center text-white px-6">
+          <h2 className="text-3xl font-bold mb-4">
+            Join Us in Making a Difference
+          </h2>
+          <p className="mb-6 opacity-90">
+            Report issues, support clean-ups, and help create a better
+            environment.
+          </p>
+          <a
+            href="/issues"
+            className="inline-block bg-white text-green-600 font-semibold px-8 py-3 rounded-full hover:bg-gray-100 transition"
+          >
+            Explore Issues
+          </a>
         </div>
       </section>
     </div>

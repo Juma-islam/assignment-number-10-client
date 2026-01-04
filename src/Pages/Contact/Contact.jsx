@@ -4,9 +4,12 @@ const Contact = () => {
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       {/* Hero */}
-      <section className="relative h-80 flex items-center justify-center bg-cover bg-center" style={{backgroundImage: "url('https://thumbs.dreamstime.com/b/contact-us-concept-business-card-phone-email-icons-modern-office-desk-customer-service-communication-background-398669041.jpg')"}}>
-        <div className="bg-black bg-opacity-50 absolute inset-0"></div>
-        <h1 className="relative text-5xl font-bold text-white">Get in Touch</h1>
+       <section className="bg-green-600 py-16 text-center text-white">
+        <h1 className="text-4xl font-bold mb-3">Contact Us</h1>
+        <p className="opacity-90 max-w-xl mx-auto">
+          Have questions, suggestions, or want to report something?  
+          We’d love to hear from you.
+        </p>
       </section>
 
       <section className="py-16 px-6 max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12">

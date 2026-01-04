@@ -1,60 +1,76 @@
-import React from 'react';
-import { Link } from 'react-router';
-
-const HelpCard = ({ title, description, category, image, link = "#" }) => {
-  return (
-    <div className="mt-5 w-11/12 mx-auto">
-      <div className="card bg-base-100 w-full shadow-sm hover:scale-105 transition-transform overflow-hidden">
-        <figure className="rounded-md m-4 overflow-hidden">
-          <img className="h-52 md:h-76 w-full object-cover" src={image} alt={title} />
-        </figure>
-        <div className="card-body">
-          <h2 className="card-title">{title}</h2>
-          <p className="badge text-xs badge-xs bg-green-500 rounded-full dark:text-white/80">{category}</p>
-          <p className="text-gray-700 dark:text-white/70 text-sm mb-2">{description.slice(0, 100)}...</p>
-
-          <Link
-            to={link}
-            className="btn w-full text-white font-semibold bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 transition-all duration-300 border-none"
-          >
-            Read Guide
-          </Link>
-        </div>
-      </div>
-    </div>
-  );
-};
+import React, { useState } from "react";
+import { BiPlus, BiMinus } from "react-icons/bi";
 
 const HelpCenter = () => {
-  const guides = [
-    { title: "How to Book Your First Cleaning", description: "Step-by-step guide for new customers to book a professional cleaner easily and quickly.", category: "Getting Started", image: "https://static.vecteezy.com/system/resources/thumbnails/073/851/373/small/professional-cleaning-women-team-illustration-vector.jpg" },
-    { title: "Eco-Friendly Cleaning Tips", description: "Learn natural cleaning methods and products that are safe for your family and the environment.", category: "Tips & Tricks", image: "https://media.istockphoto.com/id/1184141328/vector/use-eco-friendly-detergents.jpg?s=612x612&w=0&k=20&c=w7E0FBWlcvHsbZwKc9Kbn3M1Y9HtDoJabcc6bGxy4_0=" },
-    { title: "Becoming a Cleaner on CleanConnect", description: "Complete guide for cleaners to join, create profile, and start earning.", category: "For Cleaners", image: "https://cdn.dribbble.com/userupload/43584940/file/original-2baf48c0400e697a098d15236b5c39f3.jpg?resize=752x&vertical=center" },
-    { title: "Safety & Trust Guidelines", description: "How we ensure background checks, reviews, and secure payments for everyone.", category: "Safety", image: "https://www.shutterstock.com/image-vector/isometric-professional-house-cleaning-service-600nw-2043312755.jpg" },
-    { title: "Cancellation & Refund Policy", description: "Everything you need to know about cancellations, rescheduling, and refunds.", category: "Policy", image: "https://img.freepik.com/premium-vector/professional-female-janitor-cleaning-work-table-modern-office-environment-illustration_1339080-109.jpg" },
-    { title: "Deep Cleaning Checklist", description: "Professional checklist for thorough home cleaning – perfect for seasonal refresh.", category: "Tips & Tricks", image: "https://cdni.iconscout.com/illustration/premium/thumb/home-cleaning-service-workers-illustration-svg-download-png-4668378.png" },
+  const [activeIndex, setActiveIndex] = useState(null);
+
+  const faqs = [
+    {
+      question: "How do I report a cleanliness issue?",
+      answer: "Log in to your account, click on 'Add Issue', fill in the details like title, category, location, description, and submit. Your report will be visible to the community and admin.",
+    },
+    {
+      question: "How can I contribute to a clean-up effort?",
+      answer: "Go to the 'Issue Details' page for the issue you want to contribute to and click 'Pay Clean-Up Contribution'. Fill out your details and submit. Your contribution will be recorded.",
+    },
+    {
+      question: "Can I update or delete my submitted issue?",
+      answer: "Yes. Navigate to 'My Issues', click the 'Update' button to edit, or the 'Delete' button to remove your issue permanently.",
+    },
+    {
+      question: "How do I track my contributions?",
+      answer: "Visit 'My Contribution' page to view all your clean-up payments and download reports if needed.",
+    },
+    {
+      question: "Do I need to verify my email?",
+      answer: "Email verification is optional for now. You can log in and use all features without it.",
+    },
   ];
 
+  const toggleFAQ = (index) => {
+    if (activeIndex === index) {
+      setActiveIndex(null);
+    } else {
+      setActiveIndex(index);
+    }
+  };
+
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-16 px-6">
-      {/* Hero */}
-      <div className="text-center mb-12">
-        <h1 className="text-5xl font-bold text-blue-600 dark:text-blue-400 mb-4">Help Center</h1>
-        <p className="text-xl text-gray-700 dark:text-gray-300">Guides, tips, and resources to get the most out of CleanConnect</p>
-      </div>
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+      {/* Header */}
+      <section className="bg-green-600 py-16 text-center text-white">
+        <h1 className="text-4xl font-bold mb-3">Help Center</h1>
+        <p className="opacity-90 max-w-xl mx-auto">
+          Find answers to frequently asked questions about CleanConnect.
+        </p>
+      </section>
 
-      {/* Help Cards Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
-        {guides.map((guide, index) => (
-          <HelpCard key={index} {...guide} />
+      {/* FAQ Section */}
+      <section className="max-w-4xl mx-auto px-6 py-16 space-y-6">
+        {faqs.map((faq, index) => (
+          <div
+            key={index}
+            className="bg-white dark:bg-gray-800 rounded-lg shadow cursor-pointer overflow-hidden"
+          >
+            <div
+              className="flex justify-between items-center p-5"
+              onClick={() => toggleFAQ(index)}
+            >
+              <h2 className="text-lg font-medium text-gray-800 dark:text-gray-200">
+                {faq.question}
+              </h2>
+              <span className="text-green-600 dark:text-green-400 text-2xl">
+                {activeIndex === index ? <BiMinus /> : <BiPlus />}
+              </span>
+            </div>
+            {activeIndex === index && (
+              <div className="px-5 pb-5 text-gray-700 dark:text-gray-300">
+                {faq.answer}
+              </div>
+            )}
+          </div>
         ))}
-      </div>
-
-      {/* Search or Contact */}
-      <div className="text-center mt-16">
-        <p className="text-lg mb-6">Can't find what you're looking for?</p>
-        <a href="/contact" className="btn bg-gradient-to-r from-blue-500 to-blue-700 text-white px-10 py-4 text-lg">Contact Our Support Team</a>
-      </div>
+      </section>
     </div>
   );
 };

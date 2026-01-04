@@ -1,0 +1,102 @@
+[
+  {
+    "title": "Overflowing garbage near community park",
+    "category": "Garbage",
+    "location": "Gulshan 2, Dhaka",
+    "description": "Residents of Gulshan 2 are facing serious sanitation issues as the garbage bins near the community park are overflowing for several days. The uncollected trash has created a foul odor, attracting stray animals and increasing the risk of health hazards such as dengue and food-borne illnesses. Local authorities need to ensure timely collection and proper disposal to maintain cleanliness and hygiene in the area, providing a safe environment for children and families who visit the park daily.",
+    "image": "https://i.ibb.co.com/MmH7xKR/woman-collecting-garbage-black-bag.jpg",
+    "amount": 300,
+    "email": "report4@mail.com",
+    "date": "2025-10-30"
+  },
+  {
+    "title": "Blocked drainage causing waterlogging",
+    "category": "Water Supply",
+    "location": "Banani, Dhaka",
+    "description": "Heavy rainfall has caused waterlogging in Banani due to blocked drains filled with plastic waste and debris. Residents are struggling to commute, and vehicles often get stuck in knee-deep water. This stagnant water is also becoming a breeding ground for mosquitoes, increasing the risk of dengue and other water-related diseases. Urgent action is needed to clean and maintain the drainage system regularly, ensuring smooth water flow and preventing future flooding during rainy seasons.",
+    "image": "https://i.ibb.co/example2.jpg",
+    "amount": 450,
+    "email": "report5@mail.com",
+    "date": "2025-10-30"
+  },
+  {
+    "title": "Broken street lights on main road",
+    "category": "Public Property",
+    "location": "Dhanmondi 27, Dhaka",
+    "description": "Several street lights along the main road in Dhanmondi 27 have been non-functional for weeks. Poor lighting at night has raised safety concerns for pedestrians and motorists. The darkness increases the chances of accidents and petty crimes, making the neighborhood unsafe after sunset. Repairing and maintaining these street lights promptly is crucial for the safety, security, and well-being of the local community. Local authorities should schedule regular checks to ensure consistent lighting throughout the area.",
+    "image": "https://i.ibb.co/example3.jpg",
+    "amount": 500,
+    "email": "report6@mail.com",
+    "date": "2025-10-31"
+  },
+  {
+    "title": "Illegal dumping near river bank",
+    "category": "Illegal Construction",
+    "location": "Mohakhali, Dhaka",
+    "description": "A large amount of construction debris and household waste is being dumped illegally near the Mohakhali riverbank. This practice not only pollutes the water, harming aquatic life, but also poses severe health and environmental risks to nearby residents. The accumulation of debris obstructs water flow and can cause flooding during heavy rains. Immediate intervention is required to remove the waste, prevent further dumping, and enforce strict penalties to deter such illegal activities.",
+    "image": "https://i.ibb.co/example4.jpg",
+    "amount": 600,
+    "email": "report7@mail.com",
+    "date": "2025-11-01"
+  },
+  {
+    "title": "Damaged footpaths causing accidents",
+    "category": "Road Damage",
+    "location": "Mirpur 12, Dhaka",
+    "description": "The footpaths in Mirpur 12 are heavily damaged, with large cracks and uneven surfaces. Pedestrians, including children and elderly residents, face difficulties walking safely, often tripping and sustaining injuries. The lack of proper sidewalks forces people to walk on the main roads, increasing the risk of accidents. Repairing the footpaths and maintaining them regularly is essential to ensure pedestrian safety and improve the overall infrastructure of the neighborhood.",
+    "image": "https://i.ibb.co/example5.jpg",
+    "amount": 350,
+    "email": "report8@mail.com",
+    "date": "2025-11-02"
+  },
+  {
+    "title": "Overflowing trash at local bus stop",
+    "category": "Garbage",
+    "location": "Khilgaon, Dhaka",
+    "description": "The bus stop in Khilgaon has overflowing trash bins causing foul smell and unhygienic conditions. Commuters waiting for buses are often forced to navigate through waste, and stray animals rummage through the garbage, spreading it further. This situation discourages the use of public transport and affects the overall cleanliness of the area. Immediate cleaning and regular maintenance of trash bins, along with public awareness campaigns, can significantly improve the situation.",
+    "image": "https://i.ibb.co/example6.jpg",
+    "amount": 280,
+    "email": "report9@mail.com",
+    "date": "2025-11-03"
+  },
+  {
+    "title": "Cracked road causing traffic issues",
+    "category": "Road Damage",
+    "location": "Uttara, Dhaka",
+    "description": "Several major cracks and potholes have appeared on the main road in Uttara, causing severe traffic delays and accidents. Vehicles, including buses and motorcycles, frequently get damaged or face accidents due to uneven surfaces. Repairing the road promptly with durable materials is necessary to restore smooth traffic flow, prevent vehicle damage, and ensure the safety of drivers and pedestrians.",
+    "image": "https://i.ibb.co/example7.jpg",
+    "amount": 700,
+    "email": "report10@mail.com",
+    "date": "2025-11-03"
+  },
+  {
+    "title": "Clogged sewer causing foul smell",
+    "category": "Water Supply",
+    "location": "Gulshan 1, Dhaka",
+    "description": "A clogged sewer line in Gulshan 1 has resulted in stagnant water and a strong, unpleasant odor in the surrounding area. Residents complain about respiratory issues and an unhygienic environment. Immediate cleaning and maintenance of the sewer system are required to restore proper drainage and prevent further health hazards. Public awareness on proper waste disposal is also important to avoid recurrence.",
+    "image": "https://i.ibb.co/example8.jpg",
+    "amount": 400,
+    "email": "report11@mail.com",
+    "date": "2025-11-04"
+  },
+  {
+    "title": "Fallen tree blocking main road",
+    "category": "Public Property",
+    "location": "Banani, Dhaka",
+    "description": "A large tree has fallen across the main road in Banani after a storm, completely blocking vehicular traffic. Emergency services are delayed due to the obstruction, and residents are struggling to commute. Prompt removal of the fallen tree and preventive maintenance like trimming weak branches can ensure public safety and prevent future incidents.",
+    "image": "https://i.ibb.co/example9.jpg",
+    "amount": 550,
+    "email": "report12@mail.com",
+    "date": "2025-11-05"
+  },
+  {
+    "title": "Illegal billboard blocking view",
+    "category": "Illegal Construction",
+    "location": "Motijheel, Dhaka",
+    "description": "An illegally installed billboard is obstructing the view of drivers and pedestrians in Motijheel. It reduces road visibility and creates traffic hazards, especially at night. Authorities should take immediate action to remove such billboards and enforce strict regulations to prevent future illegal installations. Public safety and road aesthetics will be improved by timely intervention.",
+    "image": "https://i.ibb.co/example10.jpg",
+    "amount": 250,
+    "email": "report13@mail.com",
+    "date": "2025-11-06"
+  }
+]

@@ -55,8 +55,7 @@ CleanConnect is a full-stack MERN application that lets citizens report local is
 
 **Backend**
 - Node.js + Express
-- MongoDB (Mongoose not used – raw driver)
-- Collections: users, issues, contributions
+- MongoDB 
 
 ## Deployment
 - Frontend: Netlify

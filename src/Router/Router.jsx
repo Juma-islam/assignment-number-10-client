@@ -25,6 +25,7 @@ import MyProfile from "../Pages/MyProfile";
 import ManageIssues from "../Pages/DashboardPages/ManageIssues/ManageIssues";
 import ManageContributions from "../Pages/DashboardPages/ManageContributions/ManageContributions";
 import AdminRoute from "../routes/AdminRoute/AdminRoute";
+import Services from "../Pages/FooterPages/Services/Services";
 
 const router = createBrowserRouter([
   {
@@ -73,6 +74,10 @@ const router = createBrowserRouter([
         path: '/help',
         Component: HelpCenter
       },
+      {
+        path: '/services',
+        Component: Services
+      },
      
       {
         path: "/login",
@@ -84,10 +89,9 @@ const router = createBrowserRouter([
       },
       {
         path: "/issues/:id",
-        element: (
-          <PrivateRoute>
-            <IssueDetails />
-          </PrivateRoute>
+        element: (   
+          <PrivateRoute><IssueDetails /></PrivateRoute>
+            
         ),
         loader: ({ params }) => fetch(`https://clean-connect-project.vercel.app/issues/${params.id}`),
         hydrateFallbackElement: <Loading />,

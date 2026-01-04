@@ -1,34 +1,62 @@
-import React from 'react';
+import React from "react";
+
+const blogPosts = [
+  {
+    id: 1,
+    title: "5 Simple Ways to Keep Your Community Clean",
+    snippet: "Learn how small actions like proper waste disposal and community participation can make your neighborhood cleaner and safer.",
+    date: "Jan 2, 2026",
+    image: "https://i.ibb.co.com/LzMb9sMG/group-volunteers-collecting-garbage.jpg",
+  },
+  {
+    id: 2,
+    title: "Eco-Friendly Cleaning Products You Should Try",
+    snippet: "Switching to eco-friendly cleaning products helps the environment while keeping your home fresh and healthy.",
+    date: "Dec 15, 2025",
+    image: "https://i.ibb.co.com/q341Tdj0/lady-glasses-standing-greenhouse-near-plants.jpg",
+  },
+  {
+    id: 3,
+    title: "The Importance of Community Awareness Campaigns",
+    snippet: "Awareness campaigns empower citizens to take action and maintain clean and safe neighborhoods.",
+    date: "Nov 28, 2025",
+    image: "https://i.ibb.co.com/bRGxxkdD/young-voluntteers-work-distribution-center-looking-busy.jpg",
+  },
+];
 
 const BlogHelp = () => {
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-16 px-6">
-      <div className="max-w-6xl mx-auto">
-        <h1 className="text-5xl font-bold text-center mb-12 text-blue-600 dark:text-blue-400">Blog & Help Center</h1>
+    <div className="min-h-screen bg-gray-50">
+      {/* Header */}
+      <section className="bg-green-600 py-16 text-center text-white">
+        <h1 className="text-4xl font-bold mb-3">Our Blog</h1>
+        <p className="opacity-90 max-w-xl mx-auto">
+          Stay updated with the latest tips, news, and stories on community cleaning and sustainability.
+        </p>
+      </section>
 
-        {/* Blog Posts */}
-        <h2 className="text-3xl font-bold mb-8">Latest Blog Posts</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
-          <div className="bg-white dark:bg-gray-800 rounded-lg shadow overflow-hidden">
-            <img src="https://imperialcleaning.com/wp-content/uploads/2019/03/Post-Construction-Cleaning-Services.jpg" alt="Clean Home" className="w-full h-48 object-cover" />
+      {/* Blog Posts */}
+      <section className="max-w-6xl mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-3 gap-8">
+        {blogPosts.map((post) => (
+          <div
+            key={post.id}
+            className="bg-white rounded-2xl shadow-lg overflow-hidden hover:scale-105 transition-transform"
+          >
+            <img src={post.image} alt={post.title} className="w-full h-48 object-cover" />
             <div className="p-6">
-              <h3 className="text-xl font-semibold mb-2">10 Eco-Friendly Cleaning Tips</h3>
-              <p className="text-gray-600 dark:text-gray-400">Natural ways to keep your home sparkling...</p>
+              <p className="text-sm text-gray-500 mb-2">{post.date}</p>
+              <h3 className="text-xl font-bold text-gray-800 mb-2">{post.title}</h3>
+              <p className="text-gray-600 mb-4">{post.snippet}</p>
+              <a
+                href="#"
+                className="inline-block bg-green-600 text-white px-6 py-2 rounded-full font-semibold hover:bg-green-700 transition"
+              >
+                Read More
+              </a>
             </div>
           </div>
-      
-        </div>
-
-        {/* FAQ */}
-        <h2 className="text-3xl font-bold mb-8">Frequently Asked Questions</h2>
-        <div className="space-y-6">
-          <details className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow">
-            <summary className="text-xl font-semibold cursor-pointer">How to book a service?</summary>
-            <p className="mt-4">Sign up, search services, select date & time, and confirm.</p>
-          </details>
-        
-        </div>
-      </div>
+        ))}
+      </section>
     </div>
   );
 };

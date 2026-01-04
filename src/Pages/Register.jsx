@@ -15,8 +15,7 @@ const Register = () => {
     if (name.length < 3) newErrors.name = "Name must be at least 3 characters";
     if (!photo) newErrors.photo = "Photo URL is required";
     if (password.length < 6) newErrors.password = "Password must be 6+ characters";
-    if (!/(?=.*[a-z])(?=.*[A-Z])/.test(password))
-      newErrors.password = "Password needs uppercase & lowercase";
+    if (!/(?=.*[a-z])(?=.*[A-Z])/.test(password)) newErrors.password = "Password needs uppercase & lowercase";
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -89,23 +88,36 @@ const Register = () => {
 
         <div className="p-8">
           <form onSubmit={handleRegister} className="space-y-5">
+            {/* name  */}
             <div>
               <label className="label font-medium">Full Name</label>
-              <input type="text" name="name" className="input input-bordered w-full" placeholder="John Doe" required />
+              <input type="text" name="name" className="input input-bordered w-full" placeholder="Your name" required />
               {errors.name && <p className="text-red-500 text-xs mt-1">{errors.name}</p>}
             </div>
-
+            {/* photoURL */}
             <div>
               <label className="label font-medium">Photo URL</label>
-              <input type="url" name="photo" className="input input-bordered w-full" placeholder="https://..." required />
+              <input
+                type="url"
+                name="photo"
+                className="input input-bordered w-full"
+                placeholder="https://..."
+                required
+              />
               {errors.photo && <p className="text-red-500 text-xs mt-1">{errors.photo}</p>}
             </div>
-
+            {/* email  */}
             <div>
               <label className="label font-medium">Email</label>
-              <input type="email" name="email" className="input input-bordered w-full" placeholder="you@example.com" required />
+              <input
+                type="email"
+                name="email"
+                className="input input-bordered w-full"
+                placeholder="you@example.com"
+                required
+              />
             </div>
-
+            {/* password */}
             <div className="relative">
               <label className="label font-medium">Password</label>
               <input
@@ -133,7 +145,10 @@ const Register = () => {
           </button>
 
           <p className="text-center mt-6 text-sm">
-            Already have an account? <Link to="/login" className="text-teal-600 font-semibold hover:underline">Login Here</Link>
+            Already have an account?{" "}
+            <Link to="/login" className="text-teal-600 font-semibold hover:underline">
+              Login Here
+            </Link>
           </p>
         </div>
       </div>

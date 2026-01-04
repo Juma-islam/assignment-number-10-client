@@ -99,7 +99,8 @@ const AllIssues = () => {
             <option value="">All Categories</option>
             <option value="Garbage">Garbage</option>
             <option value="Road Damage">Road Damage</option>
-            <option value="Community">Community</option>
+            <option value="Illegal Construction">Illegal Construction</option>
+            <option value="Broken Public Property">Broken Public Property</option>
           </select>
 
           {/* Sort */}
