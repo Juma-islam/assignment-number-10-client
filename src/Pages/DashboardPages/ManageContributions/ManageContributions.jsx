@@ -65,6 +65,7 @@ const ManageContributions = () => {
 
   return (
     <div className="p-6 max-w-7xl mx-auto">
+      <title>Manage Contributions</title>
       <h1 className="text-4xl font-bold text-emerald-600 mb-8 text-center">Manage Contributions</h1>
 
       {/* Total & Search */}

@@ -83,6 +83,7 @@ const ManageIssues = () => {
 
   return (
     <div className="p-6 max-w-7xl mx-auto">
+      <title>Manage Issues</title>
       <h1 className="text-4xl font-bold text-red-600 mb-10 text-center">Manage All Issues</h1>
 
       <div className="overflow-x-auto bg-white dark:bg-gray-800 shadow-2xl rounded-2xl">

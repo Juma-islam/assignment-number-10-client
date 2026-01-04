@@ -12,7 +12,6 @@ const Login = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  // Save user to MongoDB after successful login
   const saveUserToDB = async (user) => {
     const userInfo = {
       email: user.email,
@@ -63,7 +62,7 @@ const Login = () => {
     }
   };
 
-  // Demo Credentials Auto-fill
+  // Demo Credentials 
   const demoCredentials = [
     { label: "Demo User", email: "user@communityfix.com", pass: "User123" },
     { label: "Demo Admin", email: "admin@communityfix.com", pass: "Admin123" },
