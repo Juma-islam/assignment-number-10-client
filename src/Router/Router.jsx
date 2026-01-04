@@ -9,7 +9,7 @@ import Loading from "../Pages/Loading";
 import PrivateRoute from "../routes/PrivateRoute";
 import AllIssues from "../Pages/AllIssues";
 import AddIssues from "../Pages/AddIssues/AddIssues";
-import IssueDetails from "../Pages/issueDetails";
+// import IssueDetails from "../Pages/issueDetails";
 import MyIssues from "../Pages/MyIssues/MyIssues";
 import MyContributions from "../Pages/MyContributions/MyContributions";
 import DashboardLayouts from "../Layouts/DashboardLayouts";
@@ -26,6 +26,7 @@ import ManageIssues from "../Pages/DashboardPages/ManageIssues/ManageIssues";
 import ManageContributions from "../Pages/DashboardPages/ManageContributions/ManageContributions";
 import AdminRoute from "../routes/AdminRoute/AdminRoute";
 import Services from "../Pages/FooterPages/Services/Services";
+import IssueDetails from "../Pages/IssueDetails";
 
 const router = createBrowserRouter([
   {
@@ -90,8 +91,7 @@ const router = createBrowserRouter([
       {
         path: "/issues/:id",
         element: (   
-          <PrivateRoute><IssueDetails /></PrivateRoute>
-            
+          <IssueDetails /> 
         ),
         loader: ({ params }) => fetch(`https://clean-connect-project.vercel.app/issues/${params.id}`),
         hydrateFallbackElement: <Loading />,

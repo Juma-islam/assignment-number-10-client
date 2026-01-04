@@ -1,6 +1,6 @@
 import React from "react";
 import { LuBadgeDollarSign } from "react-icons/lu";
-import { MdLocationPin } from "react-icons/md";
+import { MdCategory, MdLocationPin} from "react-icons/md";
 import { Link } from "react-router";
 
 const IssueCard = ({ issue, showAmount = false }) => {
@@ -9,7 +9,7 @@ const IssueCard = ({ issue, showAmount = false }) => {
   return (
     <div className="group">
       <div className="card bg-white dark:bg-gray-800 shadow-lg hover:shadow-2xl rounded-2xl overflow-hidden transition-all duration-500 hover:scale-105 border border-gray-200 dark:border-gray-700">
-        {/* Image */}
+       
         <figure className="overflow-hidden">
           <img
             src={image}
@@ -19,39 +19,38 @@ const IssueCard = ({ issue, showAmount = false }) => {
         </figure>
 
         {/* Body */}
-        <div className="card-body p-6">
+        <div className="card-body py-2 px-6">
           {/* Title */}
           <h2 className="card-title text-xl font-bold text-gray-800 dark:text-white line-clamp-2">
             {title}
           </h2>
 
           {/* Category Badge */}
-          <div className="mt-2">
-            <span className="badge badge-lg font-medium py-3 px-5 bg-gradient-to-r from-emerald-500 to-teal-600 text-white border-none">
+          <div className="flex items-center gap-2 text-gray-700 dark:text-gray-300 font-medium">
+            <MdCategory  className="text-xl text-blue-500"/>
+            <span className="truncate">
               {category}
             </span>
           </div>
 
           {/* Location */}
-          <div className="flex items-center gap-2 mt-4 text-gray-700 dark:text-gray-300 font-medium">
+          <div className="flex items-center gap-2 text-gray-700 dark:text-gray-300 font-medium">
             <MdLocationPin className="text-xl text-blue-500" />
             <span className="truncate">{location}</span>
           </div>
 
           {/* Amount */}
           {showAmount && (
-            <div className="flex items-center gap-2 mt-3 text-gray-800 dark:text-gray-200 font-bold text-lg">
+            <div className="flex items-center gap-2 text-gray-800 dark:text-gray-200 font-bold text-lg">
               <LuBadgeDollarSign className="text-2xl text-green-500" />
               <span>৳{amount?.toLocaleString()}</span>
             </div>
           )}
 
-          {/* Description */}
-          <p className="text-gray-600 dark:text-gray-400 text-sm mt-4 line-clamp-3">
+          <p className="text-gray-600 dark:text-gray-400 text-sm mt-1 line-clamp-2">
             {description}
           </p>
 
-          {/* Button */}
           <div className="card-actions mt-6">
             <Link
               to={`/issues/${_id}`}

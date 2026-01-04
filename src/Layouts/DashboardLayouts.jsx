@@ -18,9 +18,9 @@ const DashboardLayouts = () => {
     <div className="drawer lg:drawer-open min-h-screen bg-gray-50">
       <input id="dashboard-drawer" type="checkbox" className="drawer-toggle" />
 
-      {/* MAIN CONTENT */}
+ 
       <div className="drawer-content flex flex-col">
-        {/* NAVBAR */}
+        
         <div className="navbar bg-white border-b border-gray-200 px-6">
           <div className="flex-none lg:hidden">
             <label htmlFor="dashboard-drawer" className="btn btn-ghost btn-square">
@@ -35,7 +35,6 @@ const DashboardLayouts = () => {
             <span className="ml-3 text-sm text-gray-500">Dashboard</span>
           </div>
 
-          {/* PROFILE */}
           <div className="dropdown dropdown-end">
             <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
               <div className="w-9 rounded-full bg-gray-100 flex items-center justify-center">
@@ -68,18 +67,17 @@ const DashboardLayouts = () => {
           </div>
         </div>
 
-        {/* PAGE CONTENT */}
         <div className="flex-1 p-6 lg:p-10">
           <Outlet />
         </div>
       </div>
 
-      {/* SIDEBAR */}
+    
       <div className="drawer-side">
         <label htmlFor="dashboard-drawer" className="drawer-overlay"></label>
 
         <div className="w-72 min-h-full bg-white border-r border-gray-200 p-6 flex flex-col">
-          {/* LOGO */}
+     
           <div className="mb-8">
             <Link to="/dashboard" className="text-xl font-bold text-teal-600">
               CommunityFix
@@ -87,7 +85,6 @@ const DashboardLayouts = () => {
             <p className="text-xs text-gray-500 mt-1">Welcome, {user?.displayName?.split(" ")[0] || "User"}</p>
           </div>
 
-          {/* USER MENU */}
           {!isAdmin && (
             <ul className="space-y-1">
               <li>
@@ -118,7 +115,6 @@ const DashboardLayouts = () => {
             </ul>
           )}
 
-          {/* ADMIN MENU */}
           {isAdmin && (
             <ul className="space-y-1">
               <p className="text-xs text-gray-400 uppercase mt-4 mb-2">Admin Panel</p>
@@ -140,7 +136,6 @@ const DashboardLayouts = () => {
             </ul>
           )}
 
-          {/* LOGOUT */}
           <div className="mt-auto pt-6">
             <button onClick={handleLogout} className="btn btn-outline btn-error w-full">
               Logout

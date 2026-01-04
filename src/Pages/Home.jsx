@@ -24,7 +24,7 @@ const Home = () => {
         damage and neighborhood problems — see what’s happening around you and take part in building a cleaner, safer
         city.
       </p>
-      <div className="grid md:grid-cols-3 bg-green-50 gap-5 w-11/12 mx-auto">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 bg-green-50 gap-5 w-11/12 mx-auto">
         {data.map((issue) => (
           <IssueCard key={issue._id} issue={issue} showAmount={false}></IssueCard>
         ))}

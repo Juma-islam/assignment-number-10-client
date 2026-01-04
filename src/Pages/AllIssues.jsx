@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from "react";
 import IssueCard from "./IssueCard";
 
@@ -7,19 +6,17 @@ const AllIssues = () => {
   const [filteredIssues, setFilteredIssues] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // Filters & Search
   const [searchTerm, setSearchTerm] = useState("");
   const [category, setCategory] = useState("");
-  const [sortBy, setSortBy] = useState("newest"); 
+  const [sortBy, setSortBy] = useState("newest");
 
-  // Pagination
   const [currentPage, setCurrentPage] = useState(1);
   const issuesPerPage = 6;
 
   useEffect(() => {
     fetch("https://clean-connect-project.vercel.app/issues")
-      .then(res => res.json())
-      .then(data => {
+      .then((res) => res.json())
+      .then((data) => {
         const list = Array.isArray(data) ? data : data.result || [];
         setIssues(list);
         setFilteredIssues(list);
@@ -28,25 +25,21 @@ const AllIssues = () => {
       .catch(() => setLoading(false));
   }, []);
 
-  // Apply filters, search, sort
   useEffect(() => {
     let filtered = [...issues];
 
-    // Search
     if (searchTerm) {
       filtered = filtered.filter(
-        issue =>
+        (issue) =>
           issue.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
           issue.location.toLowerCase().includes(searchTerm.toLowerCase())
       );
     }
 
-    // Category filter
     if (category) {
-      filtered = filtered.filter(issue => issue.category === category);
+      filtered = filtered.filter((issue) => issue.category === category);
     }
 
-    // Sorting
     filtered.sort((a, b) => {
       if (sortBy === "newest") return new Date(b.date) - new Date(a.date);
       if (sortBy === "oldest") return new Date(a.date) - new Date(b.date);
@@ -56,10 +49,9 @@ const AllIssues = () => {
     });
 
     setFilteredIssues(filtered);
-    setCurrentPage(1); 
+    setCurrentPage(1);
   }, [searchTerm, category, sortBy, issues]);
 
-  // Pagination logic
   const totalPages = Math.ceil(filteredIssues.length / issuesPerPage);
   const startIndex = (currentPage - 1) * issuesPerPage;
   const currentIssues = filteredIssues.slice(startIndex, startIndex + issuesPerPage);
@@ -79,9 +71,8 @@ const AllIssues = () => {
           Explore community-reported issues. Use filters, search, and sort to find what matters to you.
         </p>
 
-        {/* Search + Filters + Sort */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-10">
-          {/* Search */}
+        
           <input
             type="text"
             placeholder="Search by title or location..."
@@ -90,7 +81,7 @@ const AllIssues = () => {
             className="input input-bordered w-full focus:ring-2 focus:ring-emerald-500"
           />
 
-          {/* Category */}
+   
           <select
             value={category}
             onChange={(e) => setCategory(e.target.value)}
@@ -103,7 +94,7 @@ const AllIssues = () => {
             <option value="Broken Public Property">Broken Public Property</option>
           </select>
 
-          {/* Sort */}
+      
           <select
             value={sortBy}
             onChange={(e) => setSortBy(e.target.value)}
@@ -116,12 +107,10 @@ const AllIssues = () => {
           </select>
         </div>
 
-        {/* Result Count */}
         <p className="text-center text-gray-700 dark:text-gray-300 mb-6 font-medium">
           Showing {currentIssues.length} of {filteredIssues.length} issues
         </p>
 
-        {/* Loading Skeleton */}
         {loading ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[...Array(6)].map((_, i) => (
@@ -140,14 +129,13 @@ const AllIssues = () => {
           </div>
         ) : (
           <>
-            {/* Issues Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-              {currentIssues.map(issue => (
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 w-11/12 mx-auto">
+              {currentIssues.map((issue) => (
                 <IssueCard key={issue._id} issue={issue} showAmount={true} />
               ))}
             </div>
 
-            {/* Pagination */}
             {totalPages > 1 && (
               <div className="flex justify-center gap-3 mt-12">
                 <button

@@ -68,7 +68,6 @@ const ManageContributions = () => {
       <title>Manage Contributions</title>
       <h1 className="text-4xl font-bold text-emerald-600 mb-8 text-center">Manage Contributions</h1>
 
-      {/* Total & Search */}
       <div className="flex flex-col md:flex-row justify-between items-center gap-4 mb-8">
         <div className="card bg-gradient-to-r from-emerald-500 to-teal-600 text-white p-6 rounded-2xl shadow-2xl">
           <h2 className="text-2xl font-bold">Total Collected</h2>
@@ -88,7 +87,6 @@ const ManageContributions = () => {
         </button>
       </div>
 
-      {/* Table */}
       <div className="overflow-x-auto bg-white dark:bg-gray-800 shadow-2xl rounded-2xl">
         <table className="table table-zebra w-full">
           <thead className="bg-emerald-100 text-black text-lg">

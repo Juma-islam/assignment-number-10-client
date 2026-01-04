@@ -59,7 +59,6 @@ const MyContributions = () => {
         </button>
       </div>
 
-      {/* laptop */}
       <div className="hidden md:block">
         <table className="w-full border-collapse text-sm md:text-base">
           <thead>
@@ -96,7 +95,6 @@ const MyContributions = () => {
         </table>
       </div>
 
-      {/* mobile */}
       <div className="grid md:hidden gap-4">
         {contributions.map((item) => (
           <div key={item._id} className="p-4 border rounded-xl shadow-sm bg-white dark:text-black">

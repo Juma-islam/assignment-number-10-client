@@ -4,9 +4,8 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router";
 
 const AddIssues = () => {
-
   const { user } = use(AuthContext);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -37,7 +36,7 @@ const AddIssues = () => {
       .then((data) => {
         if (data.success) {
           toast.success("Issue Added Successfully!");
-          navigate('/dashboard/my-issues')
+          navigate("/dashboard/my-issues");
         }
       })
       .catch((err) => {
@@ -56,7 +55,6 @@ const AddIssues = () => {
           </span>
         </h2>
         <form onSubmit={handleSubmit} className="space-y-4">
-          {/* Title Field */}
           <div>
             <label className="label font-medium">Title</label>
             <input
@@ -68,7 +66,6 @@ const AddIssues = () => {
             />
           </div>
 
-          {/* Category Dropdown */}
           <div>
             <label className="label font-medium">Category</label>
             <select
@@ -86,7 +83,7 @@ const AddIssues = () => {
               <option value="Road Damage">Road Damage</option>
             </select>
           </div>
-          {/* location */}
+
           <div>
             <label className="label font-medium">Location</label>
             <input
@@ -98,7 +95,6 @@ const AddIssues = () => {
             />
           </div>
 
-          {/* Description Textarea */}
           <div>
             <label className="label font-medium">Description</label>
             <textarea
@@ -110,7 +106,6 @@ const AddIssues = () => {
             ></textarea>
           </div>
 
-          {/* image URL */}
           <div>
             <label className="label font-medium">Image URL</label>
             <input
@@ -121,7 +116,7 @@ const AddIssues = () => {
               placeholder="https://example.com/image.jpg"
             />
           </div>
-          {/* amount  */}
+
           <div>
             <label className="label font-medium">Suggested Fix Budget</label>
             <input
@@ -132,7 +127,7 @@ const AddIssues = () => {
               placeholder="Amount"
             />
           </div>
-          {/* email  */}
+
           <div>
             <label className="label font-medium">Reporter Email</label>
             <input
@@ -144,10 +139,9 @@ const AddIssues = () => {
             />
           </div>
 
-          {/* Submit Button */}
           <button
             type="submit"
-            className="btn w-full text-white mt-6 rounded-full bg-gradient-to-r from-pink-500 to-red-600 hover:from-pink-600 hover:to-red-700"
+            className="btn w-full text-white mt-6 rounded-full bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700"
           >
             Add Issue
           </button>

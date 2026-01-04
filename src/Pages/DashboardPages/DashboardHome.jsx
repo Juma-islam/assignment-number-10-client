@@ -31,7 +31,6 @@ const DashboardHome = () => {
     fetchData();
   }, []);
 
-  // Calculations
   const totalIssues = issues.length;
   const totalContributions = contributions.reduce((sum, c) => sum + Number(c.amount || 0), 0);
 
@@ -46,7 +45,6 @@ const DashboardHome = () => {
   const resolved = statusCount.resolved || 0;
   const resolutionRate = totalIssues > 0 ? Math.round((resolved / totalIssues) * 100) : 0;
 
-  // Charts Data
   const pieData = [
     { name: "Open", value: openIssues, color: "#f59e0b" },
     { name: "In Progress", value: inProgress, color: "#3b82f6" },
@@ -80,7 +78,6 @@ const DashboardHome = () => {
         Dashboard Overview
       </h1>
 
-      {/* STATS */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
         <StatCard icon={<FaExclamationTriangle />} value={totalIssues} label="Total Issues" color="text-orange-500" />
         <StatCard
@@ -98,7 +95,7 @@ const DashboardHome = () => {
         />
       </div>
 
-      {/* CHARTS */}
+     
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 mb-12">
         <ChartCard title="Issue Status Distribution">
           <ResponsiveContainer width="100%" height={350}>
@@ -126,12 +123,11 @@ const DashboardHome = () => {
         </ChartCard>
       </div>
 
-      {/* RECENT ISSUES */}
+
       <div className="card bg-white shadow-2xl rounded-3xl overflow-hidden">
         <div className="card-body">
           <h3 className="text-3xl font-bold text-center mb-8 text-gray-800">Recent Issues</h3>
 
-          {/* DESKTOP TABLE */}
           <div className="hidden lg:block">
             <table className="table table-zebra w-full table-fixed">
               <thead className="bg-gradient-to-r from-emerald-500 to-teal-600 text-white text-lg">
@@ -187,7 +183,6 @@ const DashboardHome = () => {
             </table>
           </div>
 
-          {/* MOBILE CARD */}
           <div className="lg:hidden space-y-4">
             {recentIssues.length === 0 ? (
               <p className="text-center text-gray-500 py-6">No issues reported yet</p>
@@ -234,7 +229,6 @@ const DashboardHome = () => {
   );
 };
 
-/* REUSABLE COMPONENTS */
 const StatCard = ({ icon, value, label, color }) => (
   <div className="card bg-white shadow-2xl text-center">
     <div className="card-body">

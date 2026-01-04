@@ -9,8 +9,8 @@ const ManageIssues = () => {
 
   useEffect(() => {
     fetch("https://clean-connect-project.vercel.app/issues")
-      .then(res => res.json())
-      .then(data => {
+      .then((res) => res.json())
+      .then((data) => {
         setIssues(data);
         setLoading(false);
       })
@@ -21,11 +21,11 @@ const ManageIssues = () => {
     fetch(`https://clean-connect-project.vercel.app/issues/${id}`, {
       method: "PUT",
       headers: { "content-type": "application/json" },
-      body: JSON.stringify({ status: newStatus })
+      body: JSON.stringify({ status: newStatus }),
     })
-      .then(res => res.json())
+      .then((res) => res.json())
       .then(() => {
-        setIssues(issues.map(i => i._id === id ? { ...i, status: newStatus } : i));
+        setIssues(issues.map((i) => (i._id === id ? { ...i, status: newStatus } : i)));
         Swal.fire("Success", "Status updated!", "success");
       });
   };
@@ -38,13 +38,13 @@ const ManageIssues = () => {
       showCancelButton: true,
       confirmButtonColor: "#d33",
       cancelButtonColor: "#3085d6",
-      confirmButtonText: "Yes, delete it!"
+      confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
         fetch(`https://clean-connect-project.vercel.app/issues/${id}`, { method: "DELETE" })
-          .then(res => res.json())
+          .then((res) => res.json())
           .then(() => {
-            setIssues(issues.filter(i => i._id !== id));
+            setIssues(issues.filter((i) => i._id !== id));
             Swal.fire("Deleted!", "Issue has been deleted.", "success");
           });
       }
@@ -69,17 +69,22 @@ const ManageIssues = () => {
     fetch(`https://clean-connect-project.vercel.app/issues/${selectedIssue._id}`, {
       method: "PUT",
       headers: { "content-type": "application/json" },
-      body: JSON.stringify(updatedData)
+      body: JSON.stringify(updatedData),
     })
-      .then(res => res.json())
+      .then((res) => res.json())
       .then(() => {
-        setIssues(issues.map(i => i._id === selectedIssue._id ? { ...i, ...updatedData } : i));
+        setIssues(issues.map((i) => (i._id === selectedIssue._id ? { ...i, ...updatedData } : i)));
         Swal.fire("Updated!", "Issue has been updated.", "success");
         updateModalRef.current.close();
       });
   };
 
-  if (loading) return <div className="text-center py-20"><span className="loading loading-spinner loading-lg"></span></div>;
+  if (loading)
+    return (
+      <div className="text-center py-20">
+        <span className="loading loading-spinner loading-lg"></span>
+      </div>
+    );
 
   return (
     <div className="p-6 max-w-7xl mx-auto">
@@ -106,11 +111,13 @@ const ManageIssues = () => {
                 </td>
               </tr>
             ) : (
-              issues.map(issue => (
+              issues.map((issue) => (
                 <tr key={issue._id} className="hover:bg-red-50">
                   <td className="font-medium max-w-xs truncate">{issue.title}</td>
                   <td>{issue.email}</td>
-                  <td><span className="badge badge-primary">{issue.category}</span></td>
+                  <td>
+                    <span className="badge badge-primary">{issue.category}</span>
+                  </td>
                   <td className="font-bold">৳{issue.amount}</td>
                   <td>
                     <select
@@ -138,7 +145,7 @@ const ManageIssues = () => {
         </table>
       </div>
 
-      {/* Update Modal */}
+      
       <dialog ref={updateModalRef} className="modal modal-bottom sm:modal-middle">
         <div className="modal-box">
           <h3 className="font-bold text-2xl mb-6 text-center">Update Issue</h3>

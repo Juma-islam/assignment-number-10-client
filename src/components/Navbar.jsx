@@ -138,7 +138,6 @@ const Navbar = () => {
           </ul>
         </div>
 
-        {/* Logo */}
         <Link to="/" className="flex items-center gap-3 group">
           <div className="avatar">
             <div className="w-12 rounded-full ring ring-white ring-offset-2 ring-offset-transparent transition-all group-hover:ring-offset-teal-400">
